@@ -1,0 +1,11 @@
+Options +FollowSymLinks
+RewriteEngine On
+
+#Ruta donde debe dirigirse todo
+RewriteBase /Proyecto_IULMA/rest/
+
+#Regla que redirige a /rest/POST/postRequest.php
+RewriteCond %{THE_REQUEST} ^POST
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^postHandler/(.*)$ POST/post_handler.php?prm=$1&%{QUERY_STRING} [R=307,L]
