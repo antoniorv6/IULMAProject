@@ -23,6 +23,10 @@ function AjaxPOSTRequest (url, form, callbacksuccess)
 	{
 		callbacksuccess(xhr.responseText);
 	}
+	xhr.onerror = function()
+	{
+		console.log(xhr.responseText);
+	}
 
 	formData.append('type', '1');
 	xhr.send(formData);

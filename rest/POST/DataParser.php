@@ -44,6 +44,21 @@
 	        }
     	}
 
+    	public function type_of_doc()
+    	{
+    		$fileArray = pathinfo($this->path);
+	        $file_ext  = $fileArray['extension'];
+	        switch($file_ext)
+	        {
+	        	case "docx":
+	        		return 1;
+	        	break;
+	        	case "pdf":
+	        		return 2;
+	        	break;
+	        }
+    	}
+
     	private function read_doc() 
     	{
 	        $fileHandle = fopen($this->path, "r");
