@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Holi</title>
+		<title>Base de datos Metapress</title>
 		<script src="script.js"></script>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/folder.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 
 	<body>
-	
 		<section id="formPlace">
 			<form onsubmit="return SendPOSTRequest(this)">
-				<input type="file" id="archivo">
-				<input type="submit">
+				<label for="archivo" onclick="ClickForUpload()" id="uploader"><span class="icon-folder-open-empty"></span>Subir un fichero</label>
+				<input type="file" id="archivo" name="archivo" hidden>
+				<input type="submit" value="Analizar">
 			</form>
 		</section>
 
 	</body>
-
 </html>

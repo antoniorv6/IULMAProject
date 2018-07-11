@@ -2,7 +2,7 @@ Options +FollowSymLinks
 RewriteEngine On
 
 #Ruta donde debe dirigirse todo
-RewriteBase /Proyecto_IULMA/rest/
+RewriteBase /IULMAProject/rest/
 
 #Regla que redirige a /rest/POST/postRequest.php
 RewriteCond %{THE_REQUEST} ^POST

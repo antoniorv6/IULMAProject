@@ -1,17 +1,3 @@
-function AjaxGETRequest(url, callbacksuccess)
-{
-	let xhr = new XMLHttpRequest();
-
-	xhr.open('POST', url, true);
-
-	xhr.onload = function()
-	{
-		callbacksuccess(xhr.responseText);
-	}
-
-	xhr.send();
-}
-
 function AjaxPOSTRequest (url, form, callbacksuccess)
 {
 	let formData = new FormData(),
@@ -32,12 +18,18 @@ function AjaxPOSTRequest (url, form, callbacksuccess)
 	xhr.send(formData);
 }
 
+function ClickForUpload()
+{
+	document.getElementById('archivo').click;
+}
+
 function SendPOSTRequest()
 {
 	let data = document.getElementById('archivo').files[0];
 
 	AjaxPOSTRequest('rest/postHandler/', data, output);
 
+	document.querySelector('form').innerHTML += `<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`;
 	function output(response)
 	{
 		console.log(response);
