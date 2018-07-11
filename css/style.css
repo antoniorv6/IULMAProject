@@ -18,21 +18,36 @@ form
 	align-content: center;
 	padding: 2em;
 }
-
+label
+{
+	margin-bottom: .5em;
+}
 input
 {
 	padding: .5em;
 	margin-bottom: .2em;
+	height:50px;
+	width:100%;
+	border-radius:3px;
+	border:rgba(0,0,0,.3) 2px solid;
+	box-sizing:border-box;
+	padding:10px;
+	margin-bottom:30px;
 }
-label
+input:focus
 {
-	margin-bottom: .5em;
+	outline:none;
+		 border:rgba(24,149,215,1) 2px solid;
+		 color:rgba(24,149,215,1);
 }
 #uploader
 {
 	border: 1px solid #1284e2;
 	padding: 1em;
 	text-align: center;
+	width: 80%;
+	margin: auto;
+	margin-bottom: 2em;
 }
 #uploader:hover
 {
@@ -76,4 +91,35 @@ label
 	100% {
 	  transform: rotate(360deg);
 	}
-  }
+	}
+	
+	.button{
+		font-size: 14px;
+		font-weight: 600;
+		color: white;
+		display: inline-block;
+		float: right;
+		width: 50%;
+		margin: auto;
+		text-decoration: none;
+		-webkit-border-radius: 5px; 
+		-moz-border-radius: 5px; 
+		border-radius: 5px; 
+		background-color: #3a57af; 
+		-webkit-box-shadow: 0 3px rgba(58,87,175,.75); 
+		-moz-box-shadow: 0 3px rgba(58,87,175,.75); 
+		box-shadow: 0 3px rgba(58,87,175,.75);
+		transition: all 0.1s linear 0s; 
+		top: 0px;
+		position: relative;
+	}
+	
+	.button:hover{
+		top: 3px;
+  background-color:#2e458b;
+  -webkit-box-shadow: none; 
+  -moz-box-shadow: none; 
+	box-shadow: none;
+	cursor: pointer;
+		
+	}

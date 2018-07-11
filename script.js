@@ -71,7 +71,7 @@ function SendPOSTRequest()
 				<label for="name">PAÍS</label>
 				<input name = "name" value="${objson.BODY.COUNTRY}">
 				
-				<input type="submit">
+				<input type="submit" class="button" value = "Subir">
 
 			</form>
 		`;
