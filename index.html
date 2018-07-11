@@ -10,7 +10,15 @@
 	</head>
 
 	<body>
+		
 		<section id="formPlace">
+			<form onsubmit="return Login()">
+				<label for="email">Email</label>
+				<input type="text" name="email" id="email">
+				<label for="pwd">Password</label>
+				<input type="pwd" name="password" id="pwd">
+				<input type="submit">
+			</form>
 			<form onsubmit="return SendPOSTRequest(this)">
 				<label for="archivo" onclick="ClickForUpload()" id="uploader"><span class="icon-folder-open-empty"></span>Subir un fichero</label>
 				<input type="file" id="archivo" name="archivo" hidden>

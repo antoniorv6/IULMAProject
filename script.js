@@ -1,3 +1,4 @@
+
 function AjaxPOSTRequest (url, form, callbacksuccess)
 {
 	let formData = new FormData(),
@@ -18,9 +19,45 @@ function AjaxPOSTRequest (url, form, callbacksuccess)
 	xhr.send(formData);
 }
 
+function AjaxGETRequest(url, callbacksuccess)
+{
+	let xhr = new XMLHttpRequest();
+
+	xhr.open('GET', url, true);
+
+	xhr.onload = function()
+	{
+		callbacksuccess(xhr.responseText);
+	}
+
+	xhr.onerror
+	{
+		console.log(xhr.responseText);
+	}
+
+	xhr.send();
+}
+
 function ClickForUpload()
 {
 	document.getElementById('archivo').click;
+}
+
+function Login()
+{
+	let mail = document.getElementById('email').value,
+		pwd = document.getElementById('pwd').value;
+	let url = 'rest/login/?email=' + mail + '&pass=' + pwd;
+	AjaxGETRequest(url, checkLogin);
+
+	function checkLogin(response)
+	{
+		console.log(response);
+		let objJSON = JSON.parse(response);
+		console.log(objJSON);
+	}
+	
+	return false;
 }
 
 function SendPOSTRequest()
