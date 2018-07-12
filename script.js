@@ -32,7 +32,7 @@ function AjaxGETRequest(url, callbacksuccess)
 
 	xhr.onerror
 	{
-		console.log(xhr.responseText);
+		console.log(xhr.error);
 	}
 
 	xhr.send();
