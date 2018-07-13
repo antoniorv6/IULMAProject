@@ -1,10 +1,28 @@
-
-function AjaxPOSTRequest (url, form, callbacksuccess)
+function AjaxPOSTRequestFile (url, form, callbacksuccess)
 {
 	let formData = new FormData(),
 		xhr = new XMLHttpRequest();
 
 	formData.append('archivo', form);
+	xhr.open('POST', url, true);
+	xhr.onload = function()
+	{
+		callbacksuccess(xhr.responseText);
+	}
+	xhr.onerror = function()
+	{
+		console.log(xhr.responseText);
+	}
+
+	formData.append('type', '1');
+	xhr.send(formData);
+}
+
+function AjaxPOSTRequest (url, form, callbacksuccess)
+{
+	let formData = new FormData(form),
+		xhr = new XMLHttpRequest();
+
 	xhr.open('POST', url, true);
 	xhr.onload = function()
 	{
@@ -30,41 +48,14 @@ function AjaxGETRequest(url, callbacksuccess)
 		callbacksuccess(xhr.responseText);
 	}
 
-	xhr.onerror
-	{
-		console.log(xhr.error);
-	}
-
 	xhr.send();
 }
 
-function ClickForUpload()
-{
-	document.getElementById('archivo').click;
-}
-
-function Login()
-{
-	let mail = document.getElementById('email').value,
-		pwd = document.getElementById('pwd').value;
-	let url = 'rest/login/?email=' + mail + '&pass=' + pwd;
-	AjaxGETRequest(url, checkLogin);
-
-	function checkLogin(response)
-	{
-		console.log(response);
-		let objJSON = JSON.parse(response);
-		console.log(objJSON);
-	}
-	
-	return false;
-}
-
-function SendPOSTRequest()
+function AnalyseDocument()
 {
 	let data = document.getElementById('archivo').files[0];
 
-	AjaxPOSTRequest('rest/postHandler/', data, output);
+	AjaxPOSTRequestFile('rest/postHandler/', data, output);
 
 	document.querySelector('form').innerHTML += `<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`;
 	function output(response)

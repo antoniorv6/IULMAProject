@@ -10,8 +10,14 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^postHandler/(.*)$ POST/post_handler.php?prm=$1&%{QUERY_STRING} [R=307,L]
 
-#Regla que redirige a rest/GET/login.php
+#Regla que redirige a rest/POST/login.php --> INICIAR SESIÓN
+RewriteCond %{THE_REQUEST} ^POST
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^login/(.*)$ POST/login.php?prm=$1&%{QUERY_STRING} [R=307,L]
+
+#Regla que redirige a rest/GET/logout.php --> CERRAR SESIÓN
 RewriteCond %{THE_REQUEST} ^GET
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^login/(.*)$ GET/login.php?prm=$1&%{QUERY_STRING} [R=307,L]
+RewriteRule ^logout/(.*)$ GET/logout.php?prm=$1&%{QUERY_STRING} [R=307,L]

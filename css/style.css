@@ -4,7 +4,7 @@
 	font-family: sans-serif;
 }
 
-section
+article
 {
 	display: flex;
 	flex-direction: column;

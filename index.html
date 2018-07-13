@@ -2,7 +2,9 @@
 <html>
 	<head>
 		<title>Base de datos Metapress</title>
-		<script src="script.js"></script>
+		<script src="script/requests.js"></script>
+		<script src="script/script.js"></script>
+		<script src="script/userControl.js"></script>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" href="css/folder.css">
@@ -10,21 +12,23 @@
 	</head>
 
 	<body>
-		
 		<section id="formPlace">
-			<form onsubmit="return Login()">
-				<label for="email">Email</label>
-				<input type="text" name="email" id="email">
-				<label for="pwd">Password</label>
-				<input type="pwd" name="password" id="pwd">
-				<input type="submit">
-			</form>
-			<form onsubmit="return SendPOSTRequest(this)">
-				<label for="archivo" onclick="ClickForUpload()" id="uploader"><span class="icon-folder-open-empty"></span>Subir un fichero</label>
-				<input type="file" id="archivo" name="archivo" hidden>
-				<input type="submit" value="Analizar" class="button">
-			</form>
+			<article id="loginform">
+				<form onsubmit="return Login(this)">
+					<label for="email">Email</label>
+					<input type="text" name="email" id="email">
+					<label for="pwd">Password</label>
+					<input type="pwd" name="pass" id="pwd">
+					<input type="submit">
+				</form>
+			</article>
+			<article>
+				<form onsubmit="return SendPOSTRequest(this)">
+					<label for="archivo" onclick="ClickForUpload()" id="uploader"><span class="icon-folder-open-empty"></span>Subir un fichero</label>
+					<input type="file" id="archivo" name="archivo" hidden>
+					<input type="submit" value="Analizar" class="button">
+				</form>
+			</article>
 		</section>
-
 	</body>
 </html>
