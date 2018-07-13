@@ -31,6 +31,14 @@ function Logout()
         if(objJSON.RESPONSE_CODE == 200)
         {
             console.log('logout guay');
+            sessionStorage.removeItem('user');
+            sessionStorage.removeItem('token');
+            document.getElementById('loginform').innerHTML = `
+            <form onsubmit="return Login(this)" id="menuform">
+                <input type="text" name="email" id="email" placeholder="Email">
+                <input type="pwd" name="pass" id="pwd" placeholder="Contraseña">
+                <input type="submit">
+            </form>`;
         }
     }
 }
