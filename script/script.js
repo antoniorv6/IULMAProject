@@ -7,7 +7,7 @@ function CheckStatus()
 {
 	if(sessionStorage.getItem('user')!=null)
 	{
-		document.querySelector('article').innerHTML = `<form onsubmit="return SendPOSTRequest(this)">
+		document.querySelector('article').innerHTML = `<form onsubmit="return AnalyseDocument()" id="uploadform">
 		<label for="archivo" onclick="ClickForUpload()" id="uploader"><span class="icon-folder-open-empty"></span>Subir un fichero</label>
 		<input type="file" id="archivo" name="archivo" hidden>
 		<input type="submit" value="Analizar" class="button">

@@ -63,9 +63,9 @@ function AnalyseDocument()
 		console.log(response);
 		let objson = JSON.parse(response);
 		console.log(objson);
-		formPlace = document.getElementById('formPlace');
+		formPlace = document.querySelector('article');
 		formPlace.innerHTML = `
-			<form onsubmit="return SendDataToDB(this)">
+			<form onsubmit="return SendDataToDB(this)" id="uploadform">
 				<label for="surname">APELLIDOS</label>
 				<input name = "surname" value="${objson.BODY.SURNAME}">
 				

@@ -13,6 +13,7 @@ function Login(form)
             sessionStorage.setItem('user', objJSON.BODY.USER);
             sessionStorage.setItem('token', objJSON.BODY.SESSION_TOKEN);
             document.getElementById('loginform').innerHTML = `<button class="button" onclick="Logout()">Cerrar Sesión</button>`;
+            CheckStatus();
         }
 	}
 	
@@ -33,12 +34,7 @@ function Logout()
             console.log('logout guay');
             sessionStorage.removeItem('user');
             sessionStorage.removeItem('token');
-            document.getElementById('loginform').innerHTML = `
-            <form onsubmit="return Login(this)" id="menuform">
-                <input type="text" name="email" id="email" placeholder="Email">
-                <input type="pwd" name="pass" id="pwd" placeholder="Contraseña">
-                <input type="submit">
-            </form>`;
+            CheckStatus();
         }
     }
 }
