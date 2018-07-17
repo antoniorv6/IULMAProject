@@ -1,3 +1,13 @@
+@font-face {
+	font-family: 'Roboto';
+	src: url("../font/Roboto-Regular.ttf");
+}
+@font-face
+{
+	font-family: 'Roboto Black';
+	src: url("../font/Roboto-Black.ttf");
+}
+
 *
 {
 	box-sizing: border-box;
@@ -92,6 +102,30 @@ input:focus
 	border: 1px solid #9ecaed;
 	border-color: #9ecaed;
 	box-shadow: 0 0 10px #9ecaed;
+}
+
+.success
+{
+	color: #87D70B;
+}
+.instructions
+{
+	text-align: center;
+}
+
+.instructions>h2
+{
+	font-family: 'Roboto Black';
+}
+
+.instructions>h3
+{
+	font-family: 'Roboto';
+}
+
+form>p
+{
+	text-align: center;
 }
 
 /*LOADING*/

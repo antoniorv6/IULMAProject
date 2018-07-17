@@ -13,7 +13,7 @@ function Login(form)
             sessionStorage.setItem('user', objJSON.BODY.USER);
             sessionStorage.setItem('token', objJSON.BODY.SESSION_TOKEN);
             document.getElementById('loginform').innerHTML = `<button class="button" onclick="Logout()">Cerrar Sesión</button>`;
-            CheckStatus();
+            initMenu();
         }
 	}
 	
@@ -31,10 +31,26 @@ function Logout()
 
         if(objJSON.RESPONSE_CODE == 200)
         {
-            console.log('logout guay');
             sessionStorage.removeItem('user');
             sessionStorage.removeItem('token');
-            CheckStatus();
+            //Reinicializamos el menu
+            document.getElementById('cssmenu').innerHTML = `<ul>
+            <li class='active'><a href='index.html'><span>Inicio</span></a></li>
+            <li><a href='#'><span>Consultas</span></a></li>
+            <li class="rightside" id="loginform">
+            </li>
+            </ul>`;
+            initMenu();
+            VerifyUserInsertion();
         }
     }
+}
+
+function CheckSessionStatus()
+{
+	if(sessionStorage.getItem('user') == null)
+	{
+		return false;
+	}
+	return true;
 }

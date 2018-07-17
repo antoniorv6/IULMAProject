@@ -1,5 +1,6 @@
 <?php
 	include 'DataParser.php';
+	include '../dbConnect.php';
 	
 	header("Access-Control-Allow-Orgin: *");
 	header("Access-Control-Allow-Methods: *");
@@ -8,12 +9,15 @@
 	$response = null;
 	switch($_POST["type"])
 	{
-		case '1':
+		case "1":
 			move_uploaded_file($_FILES["archivo"]["tmp_name"], "../../uploaded/".$_FILES["archivo"]["name"]);
 			$fileHandler = new DataParser("../../uploaded/".$_FILES["archivo"]["name"]);
 			$string = $fileHandler->convertToText();
 			//Ya tenemos el string hecho, ahora llamamos a la función para sacar los datos
 			ExtractData($fileHandler, $string);
+		break;
+		case "2":
+			InsertDataInDB();
 		break;
 	}
 
@@ -84,6 +88,46 @@
 		SendResponse($type, $arrayResponse);
 	}
 
+	function InsertDataInDB()
+	{
+		$response = null;
+		$dbConnection = connectToDB();
+		//Conectados a la base de datos
+		//Saneamos las variables que insertamos en la query
+		$surname = '"'.$_POST['surname'].'"';
+		$name = '"'.$_POST['name'].'"';
+		$title = '"'.$_POST['title'].'"';
+		$source = '"'.$_POST['source'].'"';
+		$place = '"'.$_POST['place'].'"';
+		$date = '"'.$_POST['date'].'"';
+		$col = '"'.$_POST['column'].'"';
+		$medium = '"'.$_POST['medium'].'"';
+		$language = '"'.$_POST['language'].'"';
+		$country = '"'.$_POST['country'].'"';
+		$user = '"'.$_POST['user'].'"';
+		//Fin del saneamiento
+		$query = "INSERT INTO `column` (Author_surname, Author_Name, Title, Place, Dateofcreation, Col, Source, Medium, Language_written, Country, First_insert, Last_insert) VALUES ($surname, $name, $title, $place, $date, $col, $source, $medium, $language, $country, $user, $user)";
+		//Query escrita, ahora escribimos en la base de datos
+
+		if(!($result = @mysqli_query($dbConnection, $query))) 
+        {
+			$response = array(
+				'RESULT' => 'ERROR',
+				'MESSAGE' => 'Ha habido un error realizando su petición',
+				'DEBUGMESSAGE' => mysqli_error($dbConnection)
+			);
+			
+			SendResponse(0, $response);
+		}
+		
+		$response = array(
+			'RESULT' => 'OK',
+			'MESSAGE' => 'Datos insertados correctamente'
+		);
+
+		SendResponse(1, $response);
+	}
+
 	function SendResponse($type, $body)
 	{
 		switch($type)
@@ -103,4 +147,5 @@
 			break;
 		}
 	}
+
 ?>

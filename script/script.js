@@ -3,26 +3,123 @@ function ClickForUpload()
 	document.getElementById('archivo').click;
 }
 
-function CheckStatus()
+function initMenu()
 {
-	if(sessionStorage.getItem('user')!=null)
+	if(CheckSessionStatus())
 	{
-		document.querySelector('article').innerHTML = `<form onsubmit="return AnalyseDocument()" id="uploadform">
-		<label for="archivo" onclick="ClickForUpload()" id="uploader"><span class="icon-folder-open-empty"></span>Subir un fichero</label>
-		<input type="file" id="archivo" name="archivo" hidden>
-		<input type="submit" value="Analizar" class="button">
-		</form>`;
+		document.querySelector('ul').innerHTML += `<li><a href='data-insertion.html'><span>Insertar Datos</span></a></li>`;
 		document.getElementById('loginform').innerHTML = `<button class="button" onclick="Logout()">Cerrar Sesión</button>`;
+
 	}
 	else
 	{
-		document.querySelector('article').innerHTML = `<h1>BIENVENIDO A LA WEB</h1>
-		<h2>Inicia sesión para poder interactuar</h2>`;
-		document.getElementById('loginform').innerHTML = `
-		<form onsubmit="return Login(this)" id="menuform">
-			<input type="text" name="email" id="email" placeholder="Email">
-			<input type="pwd" name="pass" id="pwd" placeholder="Contraseña">
-			<input type="submit">
+		document.getElementById('loginform').innerHTML = `<form onsubmit="return Login(this)" id="menuform">
+		<input type="text" name="email" id="email" placeholder="Email">
+		<input type="pwd" name="pass" id="pwd" placeholder="Contraseña">
+		<input type="submit">
 		</form>`;
 	}
+}
+
+function AnalyseDocument()
+{
+	let data = document.getElementById('archivo').files[0];
+
+	AjaxPOSTRequestFile('rest/postHandler/', data, output);
+
+	document.querySelector('form').innerHTML += `<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`;
+	function output(response)
+	{
+		console.log(response);
+		let objson = JSON.parse(response);
+		console.log(objson);
+		formPlace = document.querySelector('section');
+		formPlace.innerHTML = `
+			<article class="instructions">
+				<h2> 2. REVISAR DATOS ANALIZADOS Y AÑADIR DATOS OPCIONALES</h2>
+				<h3> Por favor, revise los datos que hemos analizado de su documento y, si lo desea, añada datos adicionales para enriquecer la información del mismo</h3>
+			</article>
+			<article>
+			<form onsubmit="return SendDataToDB(this)" id="uploadform">
+				<p><b>Datos obligatorios</b></p>
+				<label for="surname">APELLIDOS</label>
+				<input name = "surname" value="${objson.BODY.SURNAME}">
+				
+				<label for="name">NOMBRE</label>
+				<input name = "name" value="${objson.BODY.NAME}">
+				
+				<label for="title">TÍTULO DE LA CRÓNICA</label>
+				<input name = "title" value="${objson.BODY.TITLE}">
+				
+				<label for="source">FUENTE</label>
+				<input name = "source" value="${objson.BODY.SOURCE}">
+				
+				<label for="place">LUGAR</label>
+				<input name = "place" value="${objson.BODY.PLACE}">
+				
+				<label for="date">FECHA</label>
+				<input name = "date" value="${objson.BODY.DATE}">
+				
+				<label for="page">PÁGINA</label>
+				<input name = "page" value="${objson.BODY.PAGE}">
+				
+				<label for="column">COLUMNA</label>
+				<input name = "column" value="${objson.BODY.COLUMN}">
+				
+				<label for="medium">MEDIO</label>
+				<input name = "medium" value="${objson.BODY.MEDIUM}">
+				
+				<label for="language">IDIOMA</label>
+				<input name = "language" value="${objson.BODY.LANGUAGE}">
+				
+				<label for="country">PAÍS</label>
+				<input name = "country" value="${objson.BODY.COUNTRY}">
+
+				<input name = "user" value="${sessionStorage.getItem('user')}" hidden>
+				
+				<input type="submit" class="button" value = "Subir">
+
+			</form>
+			</article>
+		`;
+	}
+
+	return false;
+}
+
+function SendDataToDB(form)
+{
+	AjaxPOSTRequest('rest/postHandler/',form, showConfirmation);
+
+	function showConfirmation(response)
+	{
+		objJSON = JSON.parse(response);
+		section = document.querySelector('section');
+		if(objJSON.BODY.RESULT == "OK")
+		{
+			section.innerHTML = `
+				<article class = "instructions">
+					<h2 class = "success"> ENHORABUENA </h2>
+					<h3>${objJSON.BODY.MESSAGE}</h3>
+					<a href="data-insertion.html" class="button"> Realizar otra inserción </button>
+				</article>
+			`;
+		}
+	}
+
+	return false;
+}
+
+function VerifyUserInsertion()
+{
+	if(!CheckSessionStatus())
+	{
+		console.log('hola');
+		window.location.replace('index.html');
+	}
+}
+
+function updateDisclaimer()
+{
+	document.getElementById('disclaimer').innerText = document.getElementById('archivo').files[0].name;
 }

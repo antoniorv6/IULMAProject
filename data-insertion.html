@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<title>Base de datos Metapress</title>
+		<script src="script/requests.js"></script>
+		<script src="script/script.js"></script>
+		<script src="script/userControl.js"></script>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/folder.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
+            VerifyUserInsertion();
+        </script>
+	</head>
+
+	<body>
+		<div id='cssmenu'>
+				<ul>
+					<li class='active'><a href='index.html'><span>Inicio</span></a></li>
+                    <li><a href='#'><span>Consultas</span></a></li>
+                    <li class="rightside" id="loginform">
+
+                    </li>
+				</ul>
+		</div>
+		<section>
+            <article class="instructions">
+                <h2> 1. ANALIZAR EL DOCUMENTO</h2>
+                <h3> Suba un archivo para detectar los datos obligatorios</h3>
+            </article>
+			<article>
+                    <form onsubmit="return AnalyseDocument()" id="uploadform">
+                            <p id="disclaimer">No hay ningún fichero seleccionado</p>
+                            <label for="archivo" onclick="ClickForUpload()" id="uploader"><span class="icon-folder-open-empty"></span>Subir un fichero</label>
+                            <input type="file" id="archivo" name="archivo" onchange="updateDisclaimer()" hidden>
+                            <input type="submit" value="Analizar" class="button">
+                    </form>
+			</article>
+		</section>
+        <script>initMenu();</script>
+	</body>
+</html>

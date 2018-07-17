@@ -17,4 +17,9 @@
         
         return $link;
     } 
+
+    function closeDBcon($link)
+    {
+        mysqli_close($link);
+    }
 ?>

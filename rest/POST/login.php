@@ -62,7 +62,8 @@
 				$response['BODY'] = $body; 
 				print json_encode($response);
 			break;
-		}
+        }
+        
     }
     
     function GenerateSessionToken($dbConnection, $user, $pass)
@@ -78,8 +79,8 @@
            $secondQuery = 'SELECT * FROM session WHERE email = ' . $user;
            if(!($secondresult = @mysqli_query($dbConnection, $secondQuery)))
            {
-            print json_encode("<p>Error al ejecutar la sentencia <b>$secondQuery</b>: " . mysqli_error($dbConnection));
-            exit; 
+                print json_encode("<p>Error al ejecutar la sentencia <b>$secondQuery</b>: " . mysqli_error($dbConnection));
+                exit; 
            }
 
            $data=mysqli_fetch_assoc($secondresult);
@@ -100,6 +101,7 @@
                 SendResponse(0, 'Error, otro dispositivo tiene la sesión iniciada');
            }
         }
+        closeDBcon($dbConnection);
         return $token;
     }
 ?>
