@@ -28,8 +28,8 @@
                 <h2> 1. ANALIZAR EL DOCUMENTO</h2>
                 <h3> Suba un archivo para detectar los datos obligatorios</h3>
             </article>
-			<article>
-                    <form onsubmit="return AnalyseDocument()" id="uploadform">
+			<article class="formholder">
+					<form onsubmit="return AnalyseDocument()" class="uploadform" id="uploadform">
                             <p id="disclaimer">No hay ningún fichero seleccionado</p>
                             <label for="archivo" onclick="ClickForUpload()" id="uploader"><span class="icon-folder-open-empty"></span>Subir un fichero</label>
                             <input type="file" id="archivo" name="archivo" onchange="updateDisclaimer()" hidden>

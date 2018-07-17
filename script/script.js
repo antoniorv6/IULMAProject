@@ -38,9 +38,10 @@ function AnalyseDocument()
 			<article class="instructions">
 				<h2> 2. REVISAR DATOS ANALIZADOS Y AÑADIR DATOS OPCIONALES</h2>
 				<h3> Por favor, revise los datos que hemos analizado de su documento y, si lo desea, añada datos adicionales para enriquecer la información del mismo</h3>
+				<button class="button info" id="buttonAdd" onclick="AddNewParamenters()">Incluir datos adicionales</button>
 			</article>
-			<article>
-			<form onsubmit="return SendDataToDB(this)" id="uploadform">
+			<article id="formupload">
+			<form onsubmit="return SendDataToDB(this)" class="uploadform">
 				<p><b>Datos obligatorios</b></p>
 				<label for="surname">APELLIDOS</label>
 				<input name = "surname" value="${objson.BODY.SURNAME}">
@@ -76,10 +77,10 @@ function AnalyseDocument()
 				<input name = "country" value="${objson.BODY.COUNTRY}">
 
 				<input name = "user" value="${sessionStorage.getItem('user')}" hidden>
-				
-				<input type="submit" class="button" value = "Subir">
+				<input type="submit" class="button addParameters" value = "Subir">
 
 			</form>
+
 			</article>
 		`;
 	}
@@ -122,4 +123,14 @@ function VerifyUserInsertion()
 function updateDisclaimer()
 {
 	document.getElementById('disclaimer').innerText = document.getElementById('archivo').files[0].name;
+}
+
+function AddNewParamenters()
+{
+	document.getElementById('buttonAdd').outerHTML = null;
+	document.getElementById('formupload').innerHTML += `<form class="uploadform">
+	<label>Parameter 1</label>
+	<input type="text" placeholder ="p1">
+	<label>Parameter 2</label>
+	<input type = "text" placeholder = "p2">`;
 }
