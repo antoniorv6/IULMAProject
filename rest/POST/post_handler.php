@@ -42,7 +42,8 @@
 				'COLUMN' => $data[7],
 				'MEDIUM' => $data[8],
 				'LANGUAGE' => $data[9],
-				'COUNTRY' => $data[10]
+				'COUNTRY' => $data[10],
+				'PATH' => "uploaded/".$_FILES["archivo"]["name"]
 			);
 			$type = 1;
 		}
@@ -105,8 +106,9 @@
 		$language = '"'.$_POST['language'].'"';
 		$country = '"'.$_POST['country'].'"';
 		$user = '"'.$_POST['user'].'"';
+		$path = '"'.$_POST['filepath'].'"';
 		//Fin del saneamiento
-		$query = "INSERT INTO `column` (Author_surname, Author_Name, Title, Place, Dateofcreation, Col, Source, Medium, Language_written, Country, First_insert, Last_insert) VALUES ($surname, $name, $title, $place, $date, $col, $source, $medium, $language, $country, $user, $user)";
+		$query = "INSERT INTO `column` (Author_surname, Author_Name, Title, Place, Dateofcreation, Col, Source, Medium, Language_written, Country, First_insert, Last_insert, Filepath) VALUES ($surname, $name, $title, $place, $date, $col, $source, $medium, $language, $country, $user, $user, $path)";
 		//Query escrita, ahora escribimos en la base de datos
 
 		if(!($result = @mysqli_query($dbConnection, $query))) 

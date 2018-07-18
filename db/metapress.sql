@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-07-2018 a las 12:43:24
+-- Tiempo de generación: 18-07-2018 a las 18:54:12
 -- Versión del servidor: 10.1.24-MariaDB
 -- Versión de PHP: 7.1.6
 
@@ -41,8 +41,17 @@ CREATE TABLE `column` (
   `Language_written` varchar(100) COLLATE utf8_bin NOT NULL,
   `Country` varchar(100) COLLATE utf8_bin NOT NULL,
   `First_Insert` varchar(100) COLLATE utf8_bin NOT NULL,
-  `Last_Insert` varchar(100) COLLATE utf8_bin NOT NULL
+  `Last_Insert` varchar(100) COLLATE utf8_bin NOT NULL,
+  `Filepath` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `column`
+--
+
+INSERT INTO `column` (`ID`, `Author_surname`, `Author_Name`, `Title`, `Place`, `Dateofcreation`, `Col`, `Source`, `Medium`, `Language_written`, `Country`, `First_Insert`, `Last_Insert`, `Filepath`) VALUES
+(11, 'Cortelazzo', ' Michele', ' Plurilingua', ' Lugano', ' 16 luglio 2013', ' col. 5-6', ' Corriere del Ticino', ' stampa', ' italiano', ' Svizzera', 'ariosvila@gmail.com', 'ariosvila@gmail.com', 'uploaded/test.docx'),
+(12, 'Cortelazzo', ' Michele', ' Plurilingua', ' Lugano', ' 16 luglio 2013', ' col. 5-6', ' Corriere del Ticino', ' stampa', ' italiano', ' Svizzera', 'ariosvila@gmail.com', 'ariosvila@gmail.com', 'uploaded/test.docx');
 
 -- --------------------------------------------------------
 
@@ -78,13 +87,6 @@ CREATE TABLE `session` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `session`
---
-
-INSERT INTO `session` (`email`, `dispositive`, `timeoflogin`, `token`) VALUES
-('ariosvila@gmail.com', '::1', '2018-07-17 11:55:09', 'b4ff5d2a1a9c2b6bcd12246ea0624975');
-
---
 -- Índices para tablas volcadas
 --
 
@@ -114,7 +116,7 @@ ALTER TABLE `session`
 -- AUTO_INCREMENT de la tabla `column`
 --
 ALTER TABLE `column`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- Restricciones para tablas volcadas
 --

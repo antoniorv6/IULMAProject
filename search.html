@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Base de datos Metapress</title>
+		<script src="script/requests.js"></script>
+		<script src="script/script.js"></script>
+		<script src="script/userControl.js"></script>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/folder.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+
+	<body>
+		<div id='cssmenu'>
+				<ul>
+					<li><a href='index.html'><span>Inicio</span></a></li>
+					<li><a href='search.html'><span>Consultas</span></a></li>
+					<li class="rightside" id="loginform">
+					</li>
+				</ul>
+		</div>
+		<section class="consultParameters">
+			<article>
+                <h3>Tipo de documento</h3>
+				<select multiple onchange="prop()">
+                    <option value="1">Tipo 1</option>
+                    <option value="2">Tipo 2</option>
+                    <option value="3">Tipo 3</option>
+                </select>
+            </article>
+            <article>
+                <h3>Fecha de creación</h3>
+                <select multiple>
+                    <option value="1">Fecha 1</option>
+                    <option value="2">Fecha 2</option>
+                    <option value="3">Fecha 3</option>
+                </select>
+            </article>
+            <article>
+                <h3>Autores</h3>
+                <select multiple>
+                        <option value="1">Autor 1</option>
+                        <option value="2">Autor 2</option>
+                        <option value="3">Autor 3</option>
+                </select>
+            </article>
+            <article>
+                <h3>Periódicos</h3>
+                <select multiple>
+                        <option value="1">Periódico 1</option>
+                        <option value="2">Periódico 2</option>
+                        <option value="3">Periódico 3</option>
+                </select>
+            </article>
+        </section>
+        <section class="results">
+            <article>
+                <h2>Resultados</h2>
+            </article>
+        </section>
+	</body>
+    <script>initMenu();</script>
+    <script>sendAllRequest();</script>
+</html>

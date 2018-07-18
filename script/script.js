@@ -77,6 +77,7 @@ function AnalyseDocument()
 				<input name = "country" value="${objson.BODY.COUNTRY}">
 
 				<input name = "user" value="${sessionStorage.getItem('user')}" hidden>
+				<input name = "filepath" value="${objson.BODY.PATH}" hidden>
 				<input type="submit" class="button addParameters" value = "Subir">
 
 			</form>
@@ -133,4 +134,30 @@ function AddNewParamenters()
 	<input type="text" placeholder ="p1">
 	<label>Parameter 2</label>
 	<input type = "text" placeholder = "p2">`;
+}
+
+function prop()
+{
+	console.log("Hacer consulta");
+}
+
+function sendAllRequest()
+{
+	AjaxGETRequest('rest/column/', PresentResult);
+
+	function PresentResult(response)
+	{
+		let objJSON = JSON.parse(response);
+		console.log(objJSON);
+		objJSON.BODY.forEach( function(element)
+		{
+			document.querySelector('.results').innerHTML += `<article class="data">
+			<p><b>Autor:</b>${element.Author_Name} ${element.Author_surname}</p>
+			<p><b>Título: </b>${element.Title}</p>
+			<p><b>Fecha: </b>${element.Dateofcreation}</p>
+			<p><b>Descarga el documento: <a href = ${element.Filepath}><span class="icon-doc"></span></a></p>
+			</article>`;
+		}); 
+		
+	}
 }

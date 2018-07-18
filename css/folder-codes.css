@@ -1,2 +1,3 @@
 
+.icon-doc:before { content: '\e800'; } /* '' */
 .icon-folder-open-empty:before { content: '\f115'; } /* '' */
