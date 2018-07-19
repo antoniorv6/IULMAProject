@@ -25,7 +25,22 @@
 	{
 		$type = 0;
 		//Ver de que tipo es nuestro archivo
+		/*DATOS DEFINITIVOS POR METER EN LA BD:
+			Abreviatura -> LÍNEA 3
+			Título de la columna particular -> LÍNEA 5
 
+			Apellido 0
+			Nombre 1
+			Título general de la columna 2
+			Nombre del periódico 3
+			Lugar 4
+			Fecha 5
+			Página 6
+			Columna 7 - puede ser nulo (comprobar tamaño de resultado)
+			Tipo de publicación 8
+			Idioma 9
+			País 10 
+		*/
 		if($parserObject->type_of_doc() == 1)
 		{
 			$lines = explode(chr(0x0D),$content); //Extraigo todas las líneas del texto
@@ -94,7 +109,8 @@
 		$response = null;
 		$dbConnection = connectToDB();
 		//Conectados a la base de datos
-		//Saneamos las variables que insertamos en la query
+		//Saneamos las variables que insertamos en la query y las parseamos
+
 		$surname = '"'.$_POST['surname'].'"';
 		$name = '"'.$_POST['name'].'"';
 		$title = '"'.$_POST['title'].'"';

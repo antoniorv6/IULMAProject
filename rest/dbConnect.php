@@ -1,5 +1,7 @@
 <?php
-     
+     /*
+        EVALUAR SI METER OTRA TABLA
+     */
      function connectToDB()
      {   
         $link = @mysqli_connect( 

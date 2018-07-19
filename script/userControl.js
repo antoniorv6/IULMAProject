@@ -1,3 +1,9 @@
+/*TODO
+    Control de roles de usuraio.
+    NEW Tabla Administrador puede controlar a los Editores. Registra
+*/
+
+
 function Login(form)
 {
 	let url = 'rest/login/'
