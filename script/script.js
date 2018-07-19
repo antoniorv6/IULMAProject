@@ -103,7 +103,7 @@ function SendDataToDB(form)
 				<article class = "instructions">
 					<h2 class = "success"> ENHORABUENA </h2>
 					<h3>${objJSON.BODY.MESSAGE}</h3>
-					<a href="data-insertion.html" class="button"> Realizar otra inserción </button>
+					<a href="data-insertion.html" class="button"> Realizar otra inserción </a>
 				</article>
 			`;
 		}
