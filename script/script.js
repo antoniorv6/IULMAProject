@@ -162,6 +162,7 @@ function sendAllRequest()
 	}
 }
 
+
 function checkOptions()
 {
 	let selects = document.querySelectorAll('select');
