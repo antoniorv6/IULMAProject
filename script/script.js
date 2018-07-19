@@ -161,3 +161,16 @@ function sendAllRequest()
 		
 	}
 }
+
+function checkOptions()
+{
+	let selects = document.querySelectorAll('select');
+
+	selects.forEach(function(child)
+		{
+			if(child.childElementCount < 7)
+			{
+				child.style.overflow = 'hidden';
+			}
+		});
+}

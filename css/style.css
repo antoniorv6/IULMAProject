@@ -7,7 +7,6 @@
 	font-family: 'Roboto Black';
 	src: url("../font/Roboto-Black.ttf");
 }
-
 *
 {
 	box-sizing: border-box;
@@ -28,10 +27,20 @@
 	flex-direction: row;
 	justify-content: space-around;
 }
-.consultParameters>article
-{
-	width: 70%;
-}
+	.consultParameters>article
+	{
+		width: 70%;
+		height: 300px;
+	}
+		.consultParameters>article>select
+		{
+			height: 100%;
+			border-radius: 6px;
+		}
+			.consultParameters>article>select option
+			{
+				padding: .5em;	
+			}
 article
 {
 	display: flex;
