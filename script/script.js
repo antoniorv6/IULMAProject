@@ -43,6 +43,9 @@ function AnalyseDocument()
 			<article id="formupload">
 			<form onsubmit="return SendDataToDB(this)" class="uploadform">
 				<p><b>Datos obligatorios</b></p>
+				<label for="abbreviation">ABREVIACIÓN</label>
+				<input name="abbreviation" value="${objson.BODY.ABBREVIATION}">
+
 				<label for="surname">APELLIDOS</label>
 				<input name = "surname" value="${objson.BODY.SURNAME}">
 				
@@ -51,6 +54,9 @@ function AnalyseDocument()
 				
 				<label for="title">TÍTULO DE LA CRÓNICA</label>
 				<input name = "title" value="${objson.BODY.TITLE}">
+
+				<label for="gen_title">TÍTULO GENERAL DE LA CRÓNICA</label>
+				<input name= "gen_title" value="${objson.BODY.GEN_TITLE}">
 				
 				<label for="source">FUENTE</label>
 				<input name = "source" value="${objson.BODY.SOURCE}">

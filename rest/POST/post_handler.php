@@ -45,11 +45,14 @@
 		{
 			$lines = explode(chr(0x0D),$content); //Extraigo todas las líneas del texto
 			$data = explode(',', $lines[1]);
-
+			$real_title = explode(chr(0x0a), $lines[3]);
+			$abbreviation = explode(chr(0x0a), $lines[5]);
 			$arrayResponse = array(
+				'ABBREVIATION' => $real_title[1],
+				'TITLE' => $abbreviation[1],
 				'SURNAME' => $data[0],
 				'NAME' => $data[1],
-				'TITLE' => $data[2],
+				'GEN_TITLE' => $data[2],
 				'SOURCE' => $data[3],
 				'PLACE' => $data[4],
 				'DATE' => $data[5],
@@ -79,10 +82,15 @@
 					}
 				}
 			}
+			//SOLUCIÓN MUY CUTRE PARA LOS PDF, MUCHO OJO QUE SI NO RESPETAN EL FORMATO NO FUNCIONA BIEN
+			$real_title = explode(chr(0x0a), $data[14]);
+			$abbreviation = explode(chr(0x0a), $data[12]);
 			$arrayResponse = array(
+				'ABBREVIATION' => $abbreviation[1],
+				'TITLE' => $real_title[1],
 				'SURNAME' => $data[0],
 				'NAME' => $data[1],
-				'TITLE' => $data[2],
+				'GEN_TITLE' => $data[2],
 				'SOURCE' => $data[3],
 				'PLACE' => $data[4],
 				'DATE' => $data[5],
@@ -90,7 +98,7 @@
 				'COLUMN' => $data[7],
 				'MEDIUM' => $data[8],
 				'LANGUAGE' => $data[9],
-				'COUNTRY' => $data[10]
+				'COUNTRY' => $data[10],
 			);
 			$type = 1;
 		}
