@@ -7,6 +7,7 @@ function initMenu()
 {
 	if(CheckSessionStatus())
 	{
+		isAdmin();
 		document.querySelector('ul').innerHTML += `<li><a href='data-insertion.html'><span>Insertar Datos</span></a></li>`;
 		document.getElementById('loginform').innerHTML = `<button class="button" onclick="Logout()">Cerrar Sesión</button>`;
 
@@ -34,6 +35,11 @@ function AnalyseDocument()
 		let objson = JSON.parse(response);
 		console.log(objson);
 		formPlace = document.querySelector('section');
+		let whatToPut = null;
+		if(objson.BODY.COLUMN != undefined)
+		{
+			whatToPut = objson.BODY.COLUMN;
+		}
 		formPlace.innerHTML = `
 			<article class="instructions">
 				<h2> 2. REVISAR DATOS ANALIZADOS Y AÑADIR DATOS OPCIONALES</h2>
@@ -71,7 +77,7 @@ function AnalyseDocument()
 				<input name = "page" value="${objson.BODY.PAGE}">
 				
 				<label for="column">COLUMNA</label>
-				<input name = "column" value="${objson.BODY.COLUMN}">
+				<input name = "column" value="${whatToPut}">
 				
 				<label for="medium">MEDIO</label>
 				<input name = "medium" value="${objson.BODY.MEDIUM}">
@@ -168,6 +174,10 @@ function sendAllRequest()
 	}
 }
 
+function redirectToAdminInterface()
+{
+	window.location.replace('adminIndex.html');
+}
 
 function checkOptions()
 {

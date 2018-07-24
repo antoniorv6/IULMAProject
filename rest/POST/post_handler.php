@@ -41,7 +41,7 @@
 			Idioma 9
 			País 10 
 		*/
-		if($parserObject->type_of_doc() == 1)
+		if($parserObject->type_of_doc() == 1) //Documento de word -> .docx
 		{
 			$lines = explode(chr(0x0D),$content); //Extraigo todas las líneas del texto
 			$data = explode(',', $lines[1]);
@@ -118,10 +118,11 @@
 		$dbConnection = connectToDB();
 		//Conectados a la base de datos
 		//Saneamos las variables que insertamos en la query y las parseamos
-
+		$abbreviation = '"'.$_POST['abbreviation'].'"';
 		$surname = '"'.$_POST['surname'].'"';
 		$name = '"'.$_POST['name'].'"';
 		$title = '"'.$_POST['title'].'"';
+		$gen_title = '"'.$_POST['gen_title'].'"';
 		$source = '"'.$_POST['source'].'"';
 		$place = '"'.$_POST['place'].'"';
 		$date = '"'.$_POST['date'].'"';
@@ -132,7 +133,7 @@
 		$user = '"'.$_POST['user'].'"';
 		$path = '"'.$_POST['filepath'].'"';
 		//Fin del saneamiento
-		$query = "INSERT INTO `column` (Author_surname, Author_Name, Title, Place, Dateofcreation, Col, Source, Medium, Language_written, Country, First_insert, Last_insert, Filepath) VALUES ($surname, $name, $title, $place, $date, $col, $source, $medium, $language, $country, $user, $user, $path)";
+		$query = "INSERT INTO `column` (Abbreviation,Author_surname, Author_Name, Title, gen_title, Place, Dateofcreation, Col, Source, Medium, Language_written, Country, First_insert, Last_insert, Filepath) VALUES ($abbreviation,$surname, $name, $title, $gen_title, $place, $date, $col, $source, $medium, $language, $country, $user, $user, $path)";
 		//Query escrita, ahora escribimos en la base de datos
 
 		if(!($result = @mysqli_query($dbConnection, $query))) 

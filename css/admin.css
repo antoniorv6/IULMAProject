@@ -1,0 +1,371 @@
+@font-face {
+	font-family: 'Roboto';
+	src: url("../font/Roboto-Regular.ttf");
+}
+@font-face
+{
+	font-family: 'Roboto Black';
+	src: url("../font/Roboto-Black.ttf");
+}
+*
+{
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+
+h1
+{
+    text-align: center;
+}
+
+.results>.data
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	border:rgba(24,149,215,1) 2px solid;
+	padding: .5em;
+	margin: .5em;
+}
+.consultParameters
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+	.consultParameters>article
+	{
+		width: 70%;
+		height: 300px;
+	}
+		.consultParameters>article>select
+		{
+			height: 100%;
+			border-radius: 6px;
+		}
+			.consultParameters>article>select option
+			{
+				padding: .5em;	
+			}
+article
+{
+	display: flex;
+	flex-direction: column;
+}
+body
+{
+	margin: 0;
+}
+.rightside
+{
+	float: right;
+}
+.rightside>button
+{
+	width: 100%;
+	height: 30px;
+	margin: .5em;
+}
+.uploadform
+{
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	width: 40%;
+}
+.uploadform>input
+{
+	padding: .5em;
+	margin-bottom: .75em;
+}
+form
+{
+	padding: .5em;
+}
+section>article
+{
+	padding: 1em;
+}
+#menuform>input[type="text"],
+input[type="pwd"]
+{
+	padding: .3em;
+	outline: none;
+	border: none;
+	border-bottom: 1px solid #ddd;
+	background: transparent;
+	color: white;
+}
+#menuform>input::placeholder
+{
+	color: white;
+}
+#menuform>input[type = "submit"]
+{
+	border: 0;
+	background-color: #87D70B;
+	padding: .4em;
+	margin-left: .3em;
+	width: 100px;
+	color: white;
+}
+#menuform>input[type = "submit"]:hover
+{
+	cursor: pointer;
+	background-color: #395809;
+}
+input:focus
+{
+	outline:none;
+		 border:rgba(24,149,215,1) 2px solid;
+		 color:rgba(24,149,215,1);
+}
+#uploader
+{
+	border: 1px solid #1284e2;
+	padding: 1em;
+	text-align: center;
+	width: 80%;
+	margin: auto;
+	margin-bottom: 2em;
+}
+#uploader:hover
+{
+	cursor: pointer;
+	border: 1px solid #9ecaed;
+	border-color: #9ecaed;
+	box-shadow: 0 0 10px #9ecaed;
+}
+
+.success
+{
+	color: #87D70B;
+}
+.instructions
+{
+	text-align: center;
+}
+
+.instructions>h2
+{
+	font-family: 'Roboto Black';
+}
+
+.instructions>h3
+{
+	font-family: 'Roboto';
+}
+
+form>p
+{
+	text-align: center;
+}
+
+.formholder
+{
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+	justify-content: center;
+}
+.formholder>form
+{
+	justify: space-around;
+}
+
+/*LOADING*/
+.lds-ring {
+	display: inline-block;
+	position: relative;
+	padding-left: 45%;
+  }
+  .lds-ring div {
+	box-sizing: border-box;
+	display: block;
+	position: absolute;
+	width: 51px;
+	height: 51px;
+	margin: 6px;
+	border: 6px solid #cef;
+	border-radius: 50%;
+	animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+	border-color: #cef transparent transparent transparent;
+  }
+  .lds-ring div:nth-child(1) {
+	animation-delay: -0.45s;
+  }
+  .lds-ring div:nth-child(2) {
+	animation-delay: -0.3s;
+  }
+  .lds-ring div:nth-child(3) {
+	animation-delay: -0.15s;
+  }
+  @keyframes lds-ring {
+	0% {
+	  transform: rotate(0deg);
+	}
+	100% {
+	  transform: rotate(360deg);
+	}
+	}
+	
+	.button{
+		font-size: 14px;
+		font-weight: 600;
+		color: white;
+		display: inline-block;
+		padding: .5em;
+		float: right;
+		width: 50%;
+		margin: auto;
+		margin-bottom: .5em;
+		text-decoration: none;
+		-webkit-border-radius: 5px; 
+		-moz-border-radius: 5px; 
+		border-radius: 5px; 
+		background-color: #3a57af; 
+		-webkit-box-shadow: 0 3px rgba(58,87,175,.75); 
+		-moz-box-shadow: 0 3px rgba(58,87,175,.75); 
+		box-shadow: 0 3px rgba(58,87,175,.75);
+		transition: all 0.1s linear 0s; 
+		top: 0px;
+		position: relative;
+    }
+    
+
+	.info{
+		background-color: #5C35BC;
+		width: 30%;
+	}
+	
+	.button:hover{
+		top: 3px;
+  background-color:#2e458b;
+  -webkit-box-shadow: none; 
+  -moz-box-shadow: none; 
+	box-shadow: none;
+	cursor: pointer;
+		
+	}
+
+	/*Estilo del menú*/
+	#cssmenu {
+		background: #1A1E2E;
+		width: auto;
+	}
+	#cssmenu ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		line-height: 1;
+		display: block;
+		zoom: 1;
+	}
+	#cssmenu ul:after {
+		content: " ";
+		display: block;
+		font-size: 0;
+		height: 0;
+		clear: both;
+		visibility: hidden;
+	}
+	#cssmenu ul li {
+		display: inline-block;
+		padding: 0;
+		margin: 0;
+	}
+	#cssmenu.align-right ul li {
+		float: right;
+	}
+	#cssmenu.align-center ul {
+		text-align: center;
+	}
+	#cssmenu ul li a {
+		color: #ffffff;
+		text-decoration: none;
+		display: block;
+		padding: 15px 25px;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 700;
+		text-transform: uppercase;
+		font-size: 14px;
+		position: relative;
+		-webkit-transition: color .25s;
+		-moz-transition: color .25s;
+		-ms-transition: color .25s;
+		-o-transition: color .25s;
+		transition: color .25s;
+	}
+	#cssmenu ul li a:hover {
+		color: #D7D7A1;
+	}
+	#cssmenu ul li a:hover:before {
+		width: 100%;
+	}
+	#cssmenu ul li a:after {
+		content: "";
+		display: block;
+		position: absolute;
+		right: -3px;
+		top: 19px;
+		height: 6px;
+		width: 6px;
+		background: #ffffff;
+		opacity: .5;
+	}
+	#cssmenu ul li a:before {
+		content: "";
+		display: block;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		height: 3px;
+		width: 0;
+		background: #333333;
+		-webkit-transition: width .25s;
+		-moz-transition: width .25s;
+		-ms-transition: width .25s;
+		-o-transition: width .25s;
+		transition: width .25s;
+	}
+	#cssmenu ul li.last > a:after,
+	#cssmenu ul li:last-child > a:after {
+		display: none;
+	}
+	#cssmenu ul li.active a {
+		color: white;
+	}
+	#cssmenu ul li.active a:before {
+		width: 100%;
+	}
+	#cssmenu.align-right li.last > a:after,
+	#cssmenu.align-right li:last-child > a:after {
+		display: block;
+	}
+	#cssmenu.align-right li:first-child a:after {
+		display: none;
+	}
+	@media screen and (max-width: 768px) {
+		#cssmenu ul li {
+			float: none;
+			display: block;
+		}
+		#cssmenu ul li a {
+			width: 100%;
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+			border-bottom: 1px solid #fb998c;
+		}
+		#cssmenu ul li.last > a,
+		#cssmenu ul li:last-child > a {
+			border: 0;
+		}
+		#cssmenu ul li a:after {
+			display: none;
+		}
+		#cssmenu ul li a:before {
+			display: none;
+		}
+	}
+	

@@ -52,6 +52,27 @@ function Logout()
     }
 }
 
+function isAdmin()
+{
+    if(sessionStorage.getItem('user')!=null)
+    {
+        let link = `rest/admin/?email=${sessionStorage.getItem('user')}`;
+        AjaxGETRequest(link, adminVerification);
+
+        function adminVerification(response)
+        {
+            let objJSON = JSON.parse(response);
+            if(objJSON.BODY.EXISTS)
+                redirectToAdminInterface();
+        }
+    }
+    else
+    {
+        return false;
+    }
+    
+}
+
 function CheckSessionStatus()
 {
 	if(sessionStorage.getItem('user') == null)
