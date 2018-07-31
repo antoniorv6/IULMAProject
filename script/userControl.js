@@ -73,6 +73,11 @@ function isAdmin()
     
 }
 
+function redirectToAdminInterface()
+{
+	window.location.replace('adminIndex.html');
+}
+
 function CheckSessionStatus()
 {
 	if(sessionStorage.getItem('user') == null)

@@ -7,7 +7,6 @@ function initMenu()
 {
 	if(CheckSessionStatus())
 	{
-		isAdmin();
 		document.querySelector('ul').innerHTML += `<li><a href='data-insertion.html'><span>Insertar Datos</span></a></li>`;
 		document.getElementById('loginform').innerHTML = `<button class="button" onclick="Logout()">Cerrar Sesión</button>`;
 
@@ -172,11 +171,6 @@ function sendAllRequest()
 		}); 
 		
 	}
-}
-
-function redirectToAdminInterface()
-{
-	window.location.replace('adminIndex.html');
 }
 
 function checkOptions()

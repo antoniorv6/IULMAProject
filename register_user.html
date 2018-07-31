@@ -26,20 +26,22 @@
 				</ul>
 		</div>
 		<section>
-			<h1>Bienvenido al panel de administrador</h1>
-			<article>
-				<h2>Gestión de usuarios</h2>
-				<a href="register_user.html" class="button">Ingresar nuevo usuario</a>
-				<table id="users">
-					<tr>
-						<th>Email</th>
-						<th>Nombre</th>
-						<th>Apellidos</th>
-						<th>Acciones</th>
-					</tr>
-				</table>
-			</article>
+            <article>
+                <h2>Ingresar un nuevo usuario</h2>
+                <h3>Por favor, inserte los datos necesarios para poder ingresar un nuevo usuario</h3>
+                <form onsubmit="return SendRegisterRequest(this)" class="uploadform">
+                    <label for="mail">Correo electrónico</label>
+                    <input type="email" name="mail">
+                    <label for="username">Nombre de usuario</label>
+                    <input type="text" name="username">
+                    <label for="username">Apellidos</label>
+                    <input type="text" name="surname">
+                    <label for="pwd">Contraseña</label>
+                    <input type="password" name="pwd" id="pass">
+                    <input type="submit" class="button addParameters">
+                </form>
+                <button onclick="GenerateRandomPwd()" class="button">Generar contraseña aleatoria</button>
+            </article>
         </section>
-        <script>getAllUsers();</script>
 	</body>
 </html>
