@@ -175,6 +175,7 @@ function sendAllRequest()
 
 function checkOptions()
 {
+	//TODO, set all columns in admin view
 	let selects = document.querySelectorAll('select');
 
 	selects.forEach(function(child)

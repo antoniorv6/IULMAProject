@@ -60,3 +60,14 @@ function SendRegisterRequest(form)
 
     return false;
 }
+
+function GetAllColumns()
+{
+    AjaxGETRequest('rest/column/', PresentResult);
+
+	function PresentResult(response)
+	{
+		let objJSON = JSON.parse(response);
+		console.log(objJSON);
+	}
+}
