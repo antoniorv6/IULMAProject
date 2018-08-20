@@ -45,8 +45,8 @@
 		{
 			$lines = explode(chr(0x0D),$content); //Extraigo todas las líneas del texto
 			$data = explode(',', $lines[1]);
-			$real_title = explode(chr(0x0a), $lines[3]);
-			$abbreviation = explode(chr(0x0a), $lines[5]);
+			$real_title = explode(chr(0x0a), $lines[2]);
+			$abbreviation = explode(chr(0x0a), $lines[3]);
 			$arrayResponse = array(
 				'ABBREVIATION' => $real_title[1],
 				'TITLE' => $abbreviation[1],
