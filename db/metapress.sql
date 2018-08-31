@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-07-2018 a las 18:54:12
+-- Tiempo de generación: 31-08-2018 a las 19:10:45
 -- Versión del servidor: 10.1.24-MariaDB
 -- Versión de PHP: 7.1.6
 
@@ -30,12 +30,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `column` (
   `ID` int(11) NOT NULL,
+  `Abbreviation` varchar(100) COLLATE utf8_bin NOT NULL,
   `Author_surname` varchar(100) COLLATE utf8_bin NOT NULL,
   `Author_Name` varchar(100) COLLATE utf8_bin NOT NULL,
   `Title` varchar(100) COLLATE utf8_bin NOT NULL,
+  `gen_title` varchar(100) COLLATE utf8_bin NOT NULL,
   `Place` varchar(100) COLLATE utf8_bin NOT NULL,
   `Dateofcreation` varchar(100) COLLATE utf8_bin NOT NULL,
-  `Col` varchar(100) COLLATE utf8_bin NOT NULL,
+  `Col` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   `Source` varchar(100) COLLATE utf8_bin NOT NULL,
   `Medium` varchar(100) COLLATE utf8_bin NOT NULL,
   `Language_written` varchar(100) COLLATE utf8_bin NOT NULL,
@@ -49,9 +51,8 @@ CREATE TABLE `column` (
 -- Volcado de datos para la tabla `column`
 --
 
-INSERT INTO `column` (`ID`, `Author_surname`, `Author_Name`, `Title`, `Place`, `Dateofcreation`, `Col`, `Source`, `Medium`, `Language_written`, `Country`, `First_Insert`, `Last_Insert`, `Filepath`) VALUES
-(11, 'Cortelazzo', ' Michele', ' Plurilingua', ' Lugano', ' 16 luglio 2013', ' col. 5-6', ' Corriere del Ticino', ' stampa', ' italiano', ' Svizzera', 'ariosvila@gmail.com', 'ariosvila@gmail.com', 'uploaded/test.docx'),
-(12, 'Cortelazzo', ' Michele', ' Plurilingua', ' Lugano', ' 16 luglio 2013', ' col. 5-6', ' Corriere del Ticino', ' stampa', ' italiano', ' Svizzera', 'ariosvila@gmail.com', 'ariosvila@gmail.com', 'uploaded/test.docx');
+INSERT INTO `column` (`ID`, `Abbreviation`, `Author_surname`, `Author_Name`, `Title`, `gen_title`, `Place`, `Dateofcreation`, `Col`, `Source`, `Medium`, `Language_written`, `Country`, `First_Insert`, `Last_Insert`, `Filepath`) VALUES
+(8, 'CorCTPlu16072013 ', 'Cortelazzo', ' Michele', 'I capolavori formali delle circolari scolastiche italiane', ' Plurilingua', ' Lugano', ' 16 luglio 2013', ' col 5-6', ' Corriere del Ticino', ' stampa', ' italiano', ' Svizzera ', 'ariosvila@gmail.com', 'ariosvila@gmail.com', 'uploaded/test_real_lorem.docx');
 
 -- --------------------------------------------------------
 
@@ -87,6 +88,13 @@ CREATE TABLE `session` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
+-- Volcado de datos para la tabla `session`
+--
+
+INSERT INTO `session` (`email`, `dispositive`, `timeoflogin`, `token`) VALUES
+('ariosvila@gmail.com', '::1', '2018-08-31 17:25:14', '9f19af5ddf426ba382020710f6388c31');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -116,7 +124,7 @@ ALTER TABLE `session`
 -- AUTO_INCREMENT de la tabla `column`
 --
 ALTER TABLE `column`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- Restricciones para tablas volcadas
 --

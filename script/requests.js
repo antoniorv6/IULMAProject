@@ -45,6 +45,7 @@ function AjaxGETRequest(url, callbacksuccess)
 
 	xhr.onload = function()
 	{
+		console.log(xhr.responseText);
 		callbacksuccess(xhr.responseText);
 	}
 

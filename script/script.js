@@ -89,6 +89,7 @@ function AnalyseDocument()
 
 				<input name = "user" value="${sessionStorage.getItem('user')}" hidden>
 				<input name = "filepath" value="${objson.BODY.PATH}" hidden>
+				<textarea name = "content" hidden>${objson.BODY.CONTENT}</textarea>
 				<input type="submit" class="button addParameters" value = "Subir">
 
 			</form>
@@ -110,6 +111,7 @@ function SendDataToDB(form)
 		section = document.querySelector('section');
 		if(objJSON.BODY.RESULT == "OK")
 		{
+			console.log(objJSON);
 			section.innerHTML = `
 				<article class = "instructions">
 					<h2 class = "success"> ENHORABUENA </h2>
@@ -155,14 +157,25 @@ function prop()
 function sendAllRequest()
 {
 	AjaxGETRequest('rest/column/', PresentResult);
+}
 
-	function PresentResult(response)
-	{
-		let objJSON = JSON.parse(response);
-		console.log(objJSON);
-		objJSON.BODY.forEach( function(element)
+function SearchByWord()
+{
+	let word = document.getElementById('wordSearch').value;
+	console.log(word);
+	let url = 'rest/column/?search='+word;
+	AjaxGETRequest(url, PresentResult);
+}
+
+function PresentResult(response)
+{
+	let objJSON = JSON.parse(response);
+	console.log(objJSON);
+	let placer = document.querySelector('.results');
+	placer.innerHTML = null;
+	objJSON.BODY.forEach( function(element)
 		{
-			document.querySelector('.results').innerHTML += `<article class="data">
+			placer.innerHTML += `<article class="data">
 			<p><b>Autor:</b>${element.Author_Name} ${element.Author_surname}</p>
 			<p><b>Título: </b>${element.Title}</p>
 			<p><b>Fecha: </b>${element.Dateofcreation}</p>
@@ -170,7 +183,6 @@ function sendAllRequest()
 			</article>`;
 		}); 
 		
-	}
 }
 
 function checkOptions()

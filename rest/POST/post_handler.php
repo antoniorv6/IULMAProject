@@ -45,11 +45,11 @@
 		{
 			$lines = explode(chr(0x0D),$content); //Extraigo todas las líneas del texto
 			$data = explode(',', $lines[1]);
-			$real_title = explode(chr(0x0a), $lines[2]);
-			$abbreviation = explode(chr(0x0a), $lines[3]);
+			$abbreviation = explode(chr(0x0a), $lines[2]);
+			$real_title = explode('.', $lines[3]);
 			$arrayResponse = array(
-				'ABBREVIATION' => $real_title[1],
-				'TITLE' => $abbreviation[1],
+				'ABBREVIATION' => $abbreviation[1],
+				'TITLE' => $real_title[0],
 				'SURNAME' => $data[0],
 				'NAME' => $data[1],
 				'GEN_TITLE' => $data[2],
@@ -61,7 +61,8 @@
 				'MEDIUM' => $data[8],
 				'LANGUAGE' => $data[9],
 				'COUNTRY' => $data[10],
-				'PATH' => "uploaded/".$_FILES["archivo"]["name"]
+				'PATH' => "uploaded/".$_FILES["archivo"]["name"],
+				'CONTENT' => $content
 			);
 			$type = 1;
 		}
@@ -99,6 +100,8 @@
 				'MEDIUM' => $data[8],
 				'LANGUAGE' => $data[9],
 				'COUNTRY' => $data[10],
+				'PATH' => "uploaded/".$_FILES["archivo"]["name"],
+				'CONTENT' => $content
 			);
 			$type = 1;
 		}
@@ -147,12 +150,29 @@
 			SendResponse(0, $response);
 		}
 		
-		$response = array(
-			'RESULT' => 'OK',
-			'MESSAGE' => 'Datos insertados correctamente'
-		);
+		$secondquery = "SELECT ID FROM `column` WHERE Abbreviation = $abbreviation";
+		if(!($secondresult = @mysqli_query($dbConnection, $secondquery))) 
+        {
+			$response = array(
+				'RESULT' => 'ERROR',
+				'MESSAGE' => 'Ha habido un problema encontrando tu ID',
+				'DEBUGMESSAGE' => mysqli_error($dbConnection)
+			);
+			
+			SendResponse(0, $response);
+		}
 
-		SendResponse(1, $response);
+		$data=mysqli_fetch_assoc($secondresult);
+
+		if(SendContent($dbConnection,$data['ID'], $_POST['content']))
+		{
+			$response = array(
+				'RESULT' => 'OK',
+				'MESSAGE' => 'Datos insertados correctamente'
+			);
+	
+			SendResponse(1, $response);
+		}
 	}
 
 	function SendResponse($type, $body)
@@ -173,6 +193,27 @@
 				print json_encode($response);
 			break;
 		}
+	}
+
+	function SendContent($dbConnection, $id, $content)
+	{
+		$contenttoDB = '"'.$content.'"';
+		$query = "INSERT INTO content (article, textcontent) VALUES ($id, $contenttoDB)";
+
+		if(!($result = @mysqli_query($dbConnection, $query))) 
+        {
+			$response = array(
+				'RESULT' => 'ERROR',
+				'MESSAGE' => 'Ha habido un problema metiendo el contenido',
+				'DEBUGMESSAGE' => mysqli_error($dbConnection)
+			);
+			
+			SendResponse(0, $response);
+			return false;
+		}
+
+		return true;
+
 	}
 
 ?>
