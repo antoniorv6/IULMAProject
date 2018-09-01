@@ -198,3 +198,26 @@ function checkOptions()
 			}
 		});
 }
+
+function DemandParameters()
+{
+	RequestAuthorNames();
+}
+
+function RequestAuthorNames()
+{
+	AjaxGETRequest('rest/consultData/?param=Author_Name', PutParameters);
+}
+
+function PutParameters(response)
+{
+	let objJSON = JSON.parse(response);
+	console.log(objJSON);
+	let place = document.getElementById('author');
+	place.innerHTML = null;
+	objJSON.BODY.forEach(function(element)
+	{
+		console.log(element);
+		place.innerHTML += `<option value="${element}">${element}</option>`;
+	});
+}

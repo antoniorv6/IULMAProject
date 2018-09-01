@@ -27,11 +27,8 @@
         <!--<button onclick="SearchWord()">Buscar</button>-->
 		<section class="consultParameters">
 			<article>
-                <h3>Tipo de documento</h3>
-				<select multiple onchange="prop()">
-                    <option value="1">Tipo 1</option>
-                    <option value="2">Tipo 2</option>
-                    <option value="3">Tipo 3</option>
+                <h3>Nombre de autor</h3>
+				<select multiple onchange="prop()" id="author">
                 </select>
             </article>
             <article>
@@ -68,4 +65,5 @@
     <script>initMenu();</script>
     <script>sendAllRequest();</script>
     <script>checkOptions();</script>
+    <script>DemandParameters();</script>
 </html>

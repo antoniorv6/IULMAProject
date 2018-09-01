@@ -1,5 +1,6 @@
 <?php
-    include '../dbConnect.php';
+	include '../dbConnect.php';
+	include '../responseSender.php';
 	
 	header("Access-Control-Allow-Orgin: *");
 	header("Access-Control-Allow-Methods: *");
@@ -38,32 +39,26 @@
 			return false;
 		}
 
-		$data=mysqli_fetch_assoc($articles)['article'];
 		$howmany = 0;
 		$query = "SELECT * FROM `column` WHERE ";
 		//En data están todos los id
 
-		if(is_array($data))
+		while($data = mysqli_fetch_assoc($articles))
 		{
-			foreach($data as $id)
-			{
-				echo $id;
-
-				if($howmany == 0)
-					$query = $query."ID = $id";
+			$id = $data['article'];
+			if($howmany == 0)
+					$query = $query."ID = $id ";
 				else 
-					$query = $query."OR ID = $id";
-				$howmany++;
-			}
+					$query = $query."OR ID = $id ";
+			
+			$howmany++;
 		}
-		else 
-			$query = $query."ID = $data";
 
 		if(!($result = @mysqli_query($dbConnection, $query))) 
     	{
-			if($data == null)
+			if($howmany == 0)
 			{
-				$response = array();
+				$response = $query;
 				SendResponse(1, $response);
 			}
 			else
@@ -71,6 +66,7 @@
 				$response = array(
 					'RESULT' => 'ERROR',
 					'MESSAGE' => 'Ha habido un error extrayendo artículos',
+					'QUERY' => $query,
 					'DEBUGMESSAGE' => mysqli_error($dbConnection)
 				);
 				SendResponse(0, $response);
@@ -84,29 +80,8 @@
     $response = array();
     while($row = mysqli_fetch_assoc($result))
     {
-        $response[$counter] = $row;
-        $counter ++;
+        array_push($response,$row);
     }
 
     SendResponse(1, $response);
-    
-    function SendResponse($type, $body)
-	{
-		switch($type)
-		{
-			case 0:
-				http_response_code(500);
-				$response = array('RESPONSE_CODE' => 501, 'RESPONSE_TYPE'=>'INTERNAL SERVER ERROR');
-				$response['BODY'] = $body; 
-				print json_encode($response);
-			break;
-
-			case 1:
-				http_response_code(200);
-				$response = array('RESPONSE_CODE' => 200, 'RESPONSE_TYPE'=>'OK');
-				$response['BODY'] = $body; 
-				print json_encode($response);
-			break;
-		}
-	}
 ?>

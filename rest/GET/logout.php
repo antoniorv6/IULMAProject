@@ -1,6 +1,7 @@
 <?php
     
     include '../dbConnect.php';
+    include '../responseSender.php';
 
     header("Access-Control-Allow-Orgin: *");
 	header("Access-Control-Allow-Methods: *");
@@ -25,25 +26,5 @@
     else
     {
         SendResponse(1, 'logout ok');
-    }
-
-    function SendResponse($type, $body)
-	{
-		switch($type)
-		{
-			case 0:
-				http_response_code(401);
-				$response = array('RESPONSE_CODE' => 401, 'RESPONSE_TYPE'=>'UNAUTHORIZED');
-				$response['BODY'] = $body; 
-				print json_encode($response);
-			break;
-
-			case 1:
-				http_response_code(200);
-				$response = array('RESPONSE_CODE' => 200, 'RESPONSE_TYPE'=>'OK');
-				$response['BODY'] = $body; 
-				print json_encode($response);
-			break;
-		}
     }
 ?>

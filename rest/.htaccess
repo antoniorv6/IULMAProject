@@ -46,8 +46,14 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^users/(.*)$ GET/users.php?prm=$1&%{QUERY_STRING} [R=307,L]
 
-#Regla que redirige a rest/GET/users.php --> CONSEGUIR TODOS LOS USUARIOS
+#Regla que redirige a rest/GET/erasedata.php --> BORRAR DATOS DE USUARIO
 RewriteCond %{THE_REQUEST} ^GET
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^delete/(.*)$ GET/eraseData.php?prm=$1&%{QUERY_STRING} [R=307,L]
+
+#Regla que redirige a rest/GET/consultparameters.php --> CONSEGUIR DATOS PARA HACER BÚSQUEDAS
+RewriteCond %{THE_REQUEST} ^GET
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^consultData/(.*)$ GET/consultparameters.php?prm=$1&%{QUERY_STRING} [R=307,L]
