@@ -3,7 +3,7 @@ function getAllUsers()
 {
     let link = 'rest/users/';
 
-    AjaxGETRequest(link, showRegisteredUsers);
+    AjaxGETRequest(link, showRegisteredUsers, undefined);
 
     function showRegisteredUsers(list)
     {
@@ -35,7 +35,7 @@ function checkIfAdmin()
 {
     let link = `rest/admin/?email=${sessionStorage.getItem('user')}`;
         
-    AjaxGETRequest(link, checkIfTrue);
+    AjaxGETRequest(link, checkIfTrue, undefined);
 
     function checkIfTrue(response)
     {
@@ -71,7 +71,7 @@ function SendRegisterRequest(form)
 
 function GetAllColumns()
 {
-    AjaxGETRequest('rest/column/', PresentResult);
+    AjaxGETRequest('rest/column/', PresentResult, undefined);
 
 	function PresentResult(response)
 	{
@@ -109,7 +109,7 @@ function GetAllColumns()
 
 function MakeDelete(id, type)
 {
-    AjaxGETRequest('rest/delete/?type=' + type + '&id=' + id, IsDeleteOk);
+    AjaxGETRequest('rest/delete/?type=' + type + '&id=' + id, IsDeleteOk, undefined);
 
     function IsDeleteOk(response)
     {

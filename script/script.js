@@ -1,3 +1,4 @@
+
 function ClickForUpload()
 {
 	document.getElementById('archivo').click;
@@ -149,14 +150,32 @@ function AddNewParamenters()
 	<input type = "text" placeholder = "p2">`;
 }
 
-function prop()
+function SearchByParameter()
 {
 	console.log("Hacer consulta");
+	let query = '';
+	let selects = document.querySelectorAll('select');
+	let howmany = 0;
+	selects.forEach(function(element)
+	{
+		if(element.options.selectedIndex != -1)
+		{
+			if(howmany == 0)
+				query += element.id + '=' + "'" + element.options[element.options.selectedIndex].value + "' ";
+			else
+				query += 'AND '+ element.id + '=' + "'" + element.options[element.options.selectedIndex].value + "' ";
+			
+			howmany++;
+		}
+	});
+	console.log(query);
+	url = 'rest/column/?query=' + query; 
+	AjaxGETRequest(url, PresentResult, undefined);
 }
 
 function sendAllRequest()
 {
-	AjaxGETRequest('rest/column/', PresentResult);
+	AjaxGETRequest('rest/column/', PresentResult, undefined);
 }
 
 function SearchByWord()
@@ -164,7 +183,7 @@ function SearchByWord()
 	let word = document.getElementById('wordSearch').value;
 	console.log(word);
 	let url = 'rest/column/?search='+word;
-	AjaxGETRequest(url, PresentResult);
+	AjaxGETRequest(url, PresentResult, undefined);
 }
 
 function PresentResult(response)
@@ -201,20 +220,23 @@ function checkOptions()
 
 function DemandParameters()
 {
-	RequestAuthorNames();
+	AjaxGETRequest('rest/consultData/?param=Author_Name', PutParameters, 'Author_Name');
+	AjaxGETRequest('rest/consultData/?param=Author_surname', PutParameters, 'Author_surname');
+	AjaxGETRequest('rest/consultData/?param=Title', PutParameters, 'Title');
+	AjaxGETRequest('rest/consultData/?param=gen_title', PutParameters, 'gen_title');
+	AjaxGETRequest('rest/consultData/?param=Place', PutParameters, 'Place');
+	AjaxGETRequest('rest/consultData/?param=Source', PutParameters, 'Source');
+	AjaxGETRequest('rest/consultData/?param=Medium', PutParameters, 'Medium');
+	AjaxGETRequest('rest/consultData/?param=Language_written', PutParameters, 'Language_written');
+	AjaxGETRequest('rest/consultData/?param=Country', PutParameters, 'Country');
+
 }
 
-function RequestAuthorNames()
-{
-	AjaxGETRequest('rest/consultData/?param=Author_Name', PutParameters);
-}
-
-function PutParameters(response)
+function PutParameters(response, theId)
 {
 	let objJSON = JSON.parse(response);
-	console.log(objJSON);
-	let place = document.getElementById('author');
-	place.innerHTML = null;
+	console.log(theId);
+	let place = document.getElementById(theId);
 	objJSON.BODY.forEach(function(element)
 	{
 		console.log(element);

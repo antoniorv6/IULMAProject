@@ -27,32 +27,53 @@
         <!--<button onclick="SearchWord()">Buscar</button>-->
 		<section class="consultParameters">
 			<article>
-                <h3>Nombre de autor</h3>
-				<select multiple onchange="prop()" id="author">
+                <h3>Nombre</h3>
+				<select multiple onchange="SearchByParameter()" id="Author_Name">
                 </select>
             </article>
             <article>
-                <h3>Fecha de creación</h3>
-                <select multiple>
-                    <option value="1">Fecha 1</option>
-                    <option value="2">Fecha 2</option>
-                    <option value="3">Fecha 3</option>
+                <h3>Apellidos</h3>
+				<select multiple onchange="SearchByParameter()" id="Author_surname">
                 </select>
             </article>
             <article>
-                <h3>Autores</h3>
-                <select multiple>
-                        <option value="1">Autor 1</option>
-                        <option value="2">Autor 2</option>
-                        <option value="3">Autor 3</option>
+                <h3>Título de la columna</h3>
+				<select multiple onchange="SearchByParameter()" id="Title">
                 </select>
             </article>
             <article>
-                <h3>Periódicos</h3>
-                <select multiple>
-                        <option value="1">Periódico 1</option>
-                        <option value="2">Periódico 2</option>
-                        <option value="3">Periódico 3</option>
+                <h3>Título general</h3>
+				<select multiple onchange="SearchByParameter()" id="gen_title">
+                </select>
+            </article>
+            <article>
+                <h3>Lugar</h3>
+				<select multiple onchange="SearchByParameter()" id="Place">
+                </select>
+            </article>
+            <article>
+                <h3>Fecha</h3>
+                <select multiple onchange="SearchByParameter()" id="Dateofcreation">
+                </select>
+                </article>
+            <article>
+                <h3>Fuente</h3>
+				<select multiple onchange="SearchByParameter()" id="Source">
+                </select>
+            </article>
+            <article>
+                <h3>Medio</h3>
+				<select multiple onchange="SearchByParameter()" id="Medium">
+                </select>
+            </article>
+            <article>
+                <h3>Idioma</h3>
+                <select multiple onchange="SearchByParameter()" id="Language_written">
+                </select>
+            </article>
+            <article>
+                <h3>País</h3>
+                <select multiple onchange="SearchByParameter()" id="Country">
                 </select>
             </article>
         </section>

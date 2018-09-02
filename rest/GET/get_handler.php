@@ -7,22 +7,8 @@
     header("Content-Type: application/json");
 
 	$dbConnection = connectToDB();
-	if(!isset($_GET['search']))
+	if(isset($_GET['search']))
 	{
-		$query = 'SELECT * FROM `column`';
-		if(!($result = @mysqli_query($dbConnection, $query))) 
-		{
-			$response = array(
-				'RESULT' => 'ERROR',
-				'MESSAGE' => 'Ha habido un error realizando su petición',
-				'DEBUGMESSAGE' => mysqli_error($dbConnection)
-			);
-				
-			SendResponse(0, $response);
-		}
-	}
-	else
-	{ 
 		$searchWord = mysqli_real_escape_string($dbConnection, $_GET['search']);
 		$searchWord = "'".'%'.$searchWord.'%'."'";
 		$firstquery = "SELECT article FROM content WHERE textcontent LIKE $searchWord";
@@ -73,7 +59,36 @@
 			}
 			return false;
 		}
-
+	}
+	else if(isset($_GET['query']))
+	{
+		$string = urldecode($_GET['query']);
+		$query = "SELECT * FROM `column` WHERE ".$string;
+		if(!($result = @mysqli_query($dbConnection, $query))) 
+		{
+			$response = array(
+				'RESULT' => 'ERROR',
+				'MESSAGE' => 'Ha habido un error realizando su petición',
+				'QUERY' => $query,
+				'DEBUGMESSAGE' => mysqli_error($dbConnection)
+			);
+				
+			SendResponse(0, $response);
+		}
+	}
+	else
+	{ 
+		$query = 'SELECT * FROM `column`';
+		if(!($result = @mysqli_query($dbConnection, $query))) 
+		{
+			$response = array(
+				'RESULT' => 'ERROR',
+				'MESSAGE' => 'Ha habido un error realizando su petición',
+				'DEBUGMESSAGE' => mysqli_error($dbConnection)
+			);
+				
+			SendResponse(0, $response);
+		}	
 	}
     
     $counter = 0;

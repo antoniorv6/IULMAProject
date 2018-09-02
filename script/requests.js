@@ -37,7 +37,7 @@ function AjaxPOSTRequest (url, form, callbacksuccess)
 	xhr.send(formData);
 }
 
-function AjaxGETRequest(url, callbacksuccess)
+function AjaxGETRequest(url, callbacksuccess, variables)
 {
 	let xhr = new XMLHttpRequest();
 
@@ -46,7 +46,11 @@ function AjaxGETRequest(url, callbacksuccess)
 	xhr.onload = function()
 	{
 		console.log(xhr.responseText);
-		callbacksuccess(xhr.responseText);
+		if(variables == undefined)
+			callbacksuccess(xhr.responseText);
+		else
+			callbacksuccess(xhr.responseText, variables);
+
 	}
 
 	xhr.send();
