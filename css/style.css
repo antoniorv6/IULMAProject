@@ -72,6 +72,11 @@ body
 	padding: .5em;
 	margin-bottom: .75em;
 }
+.uploadform>select
+{
+	padding: .5em;
+	margin-bottom: .75em;
+}
 form
 {
 	padding: .5em;

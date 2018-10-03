@@ -44,7 +44,6 @@ function AnalyseDocument()
 			<article class="instructions">
 				<h2> 2. REVISAR DATOS ANALIZADOS Y AÑADIR DATOS OPCIONALES</h2>
 				<h3> Por favor, revise los datos que hemos analizado de su documento y, si lo desea, añada datos adicionales para enriquecer la información del mismo</h3>
-				<button class="button info" id="buttonAdd" onclick="AddNewParamenters()">Incluir datos adicionales</button>
 			</article>
 			<article id="formupload">
 			<form onsubmit="return SendDataToDB(this)" class="uploadform">
@@ -91,6 +90,69 @@ function AnalyseDocument()
 				<input name = "user" value="${sessionStorage.getItem('user')}" hidden>
 				<input name = "filepath" value="${objson.BODY.PATH}" hidden>
 				<textarea name = "content" hidden>${objson.BODY.CONTENT}</textarea>
+
+				<label>Profesión</label>
+				<select>
+					<option value="Null">-</option>
+					<option value="Lingüista">Lingüista</option>
+					<option value="Periodista">Periodista</option>
+					<option value="Corrector de estilo">Corrector de estilo</option>
+					<option value="Otro">Otro</option>
+				</select>
+				<label>Estilo</label>
+				<select>
+					<option value="Null">-</option>
+					<option value="Prescriptivo">Prescriptivo</option>
+					<option value="Descriptivo">Descriptivo</option>
+					<option value="Lúdico">Lúdico</option>
+				</select>
+				<label>Política lingüística</label>
+				<select>
+					<option value="Null">-</option>
+					<option value="Si">Sí</option>
+					<option value="No">No</option>
+				</select>
+				<label>Dimensión lingüística</label>
+				<select>
+					<option value="Null">-</option>
+					<option value="Fonética">Fonética</option>
+					<option value="Tipografía">Tipografía</option>
+					<option value="Morfología">Morfología</option>
+					<option value="Sintaxis">Sintaxis</option>
+					<option value="Léxico">Léxico</option>
+					<option value="Retórica">Retórica</option>
+					<option value="Pragmática y textualidad">Pragmática y textualidad</option>
+				</select>
+				<label>Préstamos</label>
+				<select>
+					<option value="Null">-</option>
+					<option value="Anglicismo">Fonétuca</option>
+					<option value="Germanismo">Tipografía</option>
+					<option value="Latinismo">Morfología</option>
+					<option value="Galicismo">Sintaxis</option>
+					<option value="Hispanismo">Léxico</option>
+					<option value="Italinismo">Retórica</option>
+				</select>
+				<label>Neologismo</label>
+				<select>
+					<option value="Null">-</option>
+					<option value="Si">Sí</option>
+					<option value="No">No</option>
+				</select>
+				<label>Formación de palabras</label>
+				<select>
+					<option value="Null">-</option>
+					<option value="Abreviación">Abreviación</option>
+					<option value="Composición">Tipografía</option>
+					<option value="Prefijación">Prefijación</option>
+					<option value="Sufijación">Sufijación</option>
+				</select>
+				<label>Etimología</label>
+				<select>
+					<option value="Null">-</option>
+					<option value="Si">Sí</option>
+					<option value="No">No</option>
+				</select>
 				<input type="submit" class="button addParameters" value = "Subir">
 
 			</form>
@@ -138,16 +200,6 @@ function VerifyUserInsertion()
 function updateDisclaimer()
 {
 	document.getElementById('disclaimer').innerText = document.getElementById('archivo').files[0].name;
-}
-
-function AddNewParamenters()
-{
-	document.getElementById('buttonAdd').outerHTML = null;
-	document.getElementById('formupload').innerHTML += `<form class="uploadform">
-	<label>Parameter 1</label>
-	<input type="text" placeholder ="p1">
-	<label>Parameter 2</label>
-	<input type = "text" placeholder = "p2">`;
 }
 
 function SearchByParameter()
