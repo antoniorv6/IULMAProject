@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-08-2018 a las 19:10:45
+-- Tiempo de generación: 03-10-2018 a las 09:25:11
 -- Versión del servidor: 10.1.24-MariaDB
 -- Versión de PHP: 7.1.6
 
@@ -52,7 +52,8 @@ CREATE TABLE `column` (
 --
 
 INSERT INTO `column` (`ID`, `Abbreviation`, `Author_surname`, `Author_Name`, `Title`, `gen_title`, `Place`, `Dateofcreation`, `Col`, `Source`, `Medium`, `Language_written`, `Country`, `First_Insert`, `Last_Insert`, `Filepath`) VALUES
-(8, 'CorCTPlu16072013 ', 'Cortelazzo', ' Michele', 'I capolavori formali delle circolari scolastiche italiane', ' Plurilingua', ' Lugano', ' 16 luglio 2013', ' col 5-6', ' Corriere del Ticino', ' stampa', ' italiano', ' Svizzera ', 'ariosvila@gmail.com', 'ariosvila@gmail.com', 'uploaded/test_real_lorem.docx');
+(15, 'CorCTPlu16072013 ', 'Cortelazzo', ' Michele', 'I capolavori formali delle circolari scolastiche italiane', ' Plurilingua', ' Lugano', ' 16 luglio 2013', ' col 5-6', ' Corriere del Ticino', ' stampa', ' italiano', ' Svizzera ', 'ariosvila@gmail.com', 'ariosvila@gmail.com', 'uploaded/test_real_lorem.docx'),
+(16, 'CoreCat2588', 'Rivers', 'Antonio', 'I capolavori formali delle circolari scolastiche italiane', ' Plurilingua', ' Lugano', ' 16 luglio 2013', ' col 5-6', ' Corriere del Ticino', ' stampa', ' italiano', ' Svizzera ', 'ariosvila@gmail.com', 'ariosvila@gmail.com', 'uploaded/test_real_lorem.docx');
 
 -- --------------------------------------------------------
 
@@ -92,7 +93,7 @@ CREATE TABLE `session` (
 --
 
 INSERT INTO `session` (`email`, `dispositive`, `timeoflogin`, `token`) VALUES
-('ariosvila@gmail.com', '::1', '2018-08-31 17:25:14', '9f19af5ddf426ba382020710f6388c31');
+('ariosvila@gmail.com', '::1', '2018-09-02 17:07:21', 'f24273999e68104e191ef9cb9dfc34c0');
 
 --
 -- Índices para tablas volcadas
@@ -124,7 +125,7 @@ ALTER TABLE `session`
 -- AUTO_INCREMENT de la tabla `column`
 --
 ALTER TABLE `column`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- Restricciones para tablas volcadas
 --
