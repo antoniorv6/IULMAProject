@@ -92,29 +92,29 @@ function AnalyseDocument()
 				<textarea name = "content" hidden>${objson.BODY.CONTENT}</textarea>
 
 				<label>Profesión</label>
-				<select>
-					<option value="Null">-</option>
+				<select name="profession">
+					<option>-</option>
 					<option value="Lingüista">Lingüista</option>
 					<option value="Periodista">Periodista</option>
 					<option value="Corrector de estilo">Corrector de estilo</option>
 					<option value="Otro">Otro</option>
 				</select>
 				<label>Estilo</label>
-				<select>
-					<option value="Null">-</option>
+				<select name="style">
+					<option>-</option>
 					<option value="Prescriptivo">Prescriptivo</option>
 					<option value="Descriptivo">Descriptivo</option>
 					<option value="Lúdico">Lúdico</option>
 				</select>
 				<label>Política lingüística</label>
-				<select>
-					<option value="Null">-</option>
+				<select name="policy">
+					<option>-</option>
 					<option value="Si">Sí</option>
 					<option value="No">No</option>
 				</select>
 				<label>Dimensión lingüística</label>
-				<select>
-					<option value="Null">-</option>
+				<select name="dimention">
+					<option>-</option>
 					<option value="Fonética">Fonética</option>
 					<option value="Tipografía">Tipografía</option>
 					<option value="Morfología">Morfología</option>
@@ -124,8 +124,8 @@ function AnalyseDocument()
 					<option value="Pragmática y textualidad">Pragmática y textualidad</option>
 				</select>
 				<label>Préstamos</label>
-				<select>
-					<option value="Null">-</option>
+				<select name="loans">
+					<option>-</option>
 					<option value="Anglicismo">Fonétuca</option>
 					<option value="Germanismo">Tipografía</option>
 					<option value="Latinismo">Morfología</option>
@@ -134,22 +134,22 @@ function AnalyseDocument()
 					<option value="Italinismo">Retórica</option>
 				</select>
 				<label>Neologismo</label>
-				<select>
-					<option value="Null">-</option>
+				<select name="neologism">
+					<option>-</option>
 					<option value="Si">Sí</option>
 					<option value="No">No</option>
 				</select>
 				<label>Formación de palabras</label>
-				<select>
-					<option value="Null">-</option>
+				<select name="wordformation">
+					<option>-</option>
 					<option value="Abreviación">Abreviación</option>
 					<option value="Composición">Tipografía</option>
 					<option value="Prefijación">Prefijación</option>
 					<option value="Sufijación">Sufijación</option>
 				</select>
 				<label>Etimología</label>
-				<select>
-					<option value="Null">-</option>
+				<select name="etimology">
+					<option>-</option>
 					<option value="Si">Sí</option>
 					<option value="No">No</option>
 				</select>

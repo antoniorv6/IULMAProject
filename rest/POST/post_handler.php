@@ -165,13 +165,29 @@
 
 		$data=mysqli_fetch_assoc($secondresult);
 
+		//Aquí toca meter los datos adicionales
 		if(SendContent($dbConnection,$data['ID'], $_POST['content']))
-		{
-			$response = array(
+		{	
+			$insert = false;
+			$idtoinsert = $data['ID'];
+			$finalquery = "INSERT INTO additionaldata (article, profession, style, lpolicy, dimention, loans, neologism, wordformation, etimology) VALUES ($idtoinsert, ";
+			$finalquery = $finalquery . '"'. $_POST['profession'] . '"' . "," . '"' . $_POST['style'] . '"' . "," . '"' . $_POST['policy'] .'"' . "," . '"'. $_POST['dimention'] . '"' . "," . '"' . $_POST['loans'] .'"' . "," . '"'. $_POST['neologism'] . '"' . "," . '"' . $_POST['wordformation'] . '"' . "," . '"' . $_POST['etimology'] . '"' . ")";
+			
+			if(!($result = @mysqli_query($dbConnection, $finalquery))) 
+        	{
+				$response = array(
+					'RESULT' => 'ERROR',
+					'MESSAGE' => 'Ha habido un problema metiendo los datos adicionales',
+					'DEBUGMESSAGE' => mysqli_error($dbConnection));
+				
+				SendResponse(0, $response);	
+		}
+
+		$response = array(
 				'RESULT' => 'OK',
 				'MESSAGE' => 'Datos insertados correctamente'
 			);
-	
+			
 			SendResponse(1, $response);
 		}
 	}
