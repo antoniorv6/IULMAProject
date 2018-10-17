@@ -5,9 +5,9 @@
      function connectToDB()
      {   
         $link = @mysqli_connect( 
-            'localhost',   // El servidor 
-            'root',    // El usuario 
-            '',          // La contraseña 
+            'mysql-5602.dinaserver.com',   // El servidor 
+            'antonio',    // El usuario 
+            '1a2b3c',          // La contraseña 
             'metapress'); // La base de datos 
 
         if(!$link) 

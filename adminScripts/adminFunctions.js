@@ -1,7 +1,7 @@
 
 function getAllUsers()
 {
-    let link = 'rest/users/';
+    let link = './rest/GET/users.php';
 
     AjaxGETRequest(link, showRegisteredUsers, undefined);
 
@@ -33,7 +33,7 @@ function getAllUsers()
 
 function checkIfAdmin()
 {
-    let link = `rest/admin/?email=${sessionStorage.getItem('user')}`;
+    let link = `./rest/GET/admins.php?email=${sessionStorage.getItem('user')}`;
         
     AjaxGETRequest(link, checkIfTrue, undefined);
 
@@ -54,7 +54,7 @@ function GenerateRandomPwd()
 
 function SendRegisterRequest(form)
 {
-    AjaxPOSTRequest('rest/register/', form, registerResponse);
+    AjaxPOSTRequest('./rest/POST/register.php', form, registerResponse);
 
     function registerResponse(response)
     {
@@ -71,7 +71,7 @@ function SendRegisterRequest(form)
 
 function GetAllColumns()
 {
-    AjaxGETRequest('rest/column/', PresentResult, undefined);
+    AjaxGETRequest('./rest/GET/get_handler.php', PresentResult, undefined);
 
 	function PresentResult(response)
 	{
@@ -109,7 +109,7 @@ function GetAllColumns()
 
 function MakeDelete(id, type)
 {
-    AjaxGETRequest('rest/delete/?type=' + type + '&id=' + id, IsDeleteOk, undefined);
+    AjaxGETRequest('./rest/GET/eraseData.php?type=' + type + '&id=' + id, IsDeleteOk, undefined);
 
     function IsDeleteOk(response)
     {

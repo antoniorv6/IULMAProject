@@ -6,7 +6,7 @@
 
 function Login(form)
 {
-	let url = 'rest/login/'
+	let url = './rest/POST/login.php'
 	AjaxPOSTRequest(url, form, checkLogin);
 
 	function checkLogin(response)
@@ -28,7 +28,7 @@ function Login(form)
 
 function Logout()
 {
-    let link = 'rest/logout/?user=' + sessionStorage.getItem('user');
+    let link = './rest/GET/logout.php?user=' + sessionStorage.getItem('user');
     AjaxGETRequest(link, logoutSuccess);
 
     function logoutSuccess(response)
@@ -56,7 +56,7 @@ function isAdmin()
 {
     if(sessionStorage.getItem('user')!=null)
     {
-        let link = `rest/admin/?email=${sessionStorage.getItem('user')}`;
+        let link = `./rest/GET/admins.php?email=${sessionStorage.getItem('user')}`;
         AjaxGETRequest(link, adminVerification);
 
         function adminVerification(response)

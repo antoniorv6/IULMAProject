@@ -48,23 +48,47 @@
 			$data = explode(',', $lines[1]);
 			$abbreviation = explode(chr(0x0a), $lines[2]);
 			$real_title = explode('.', $lines[3]);
-			$arrayResponse = array(
-				'ABBREVIATION' => $abbreviation[1],
-				'TITLE' => $real_title[0],
-				'SURNAME' => $data[0],
-				'NAME' => $data[1],
-				'GEN_TITLE' => $data[2],
-				'SOURCE' => $data[3],
-				'PLACE' => $data[4],
-				'DATE' => $data[5],
-				'PAGE' => $data[6],
-				'COLUMN' => $data[7],
-				'MEDIUM' => $data[8],
-				'LANGUAGE' => $data[9],
-				'COUNTRY' => $data[10],
-				'PATH' => "uploaded/".$_FILES["archivo"]["name"],
-				'CONTENT' => $content
-			);
+			
+			if(sizeof($data) == 11)
+			{
+				$arrayResponse = array(
+					'ABBREVIATION' => $abbreviation[1],
+					'TITLE' => $real_title[0],
+					'SURNAME' => $data[0],
+					'NAME' => $data[1],
+					'GEN_TITLE' => $data[2],
+					'SOURCE' => $data[3],
+					'PLACE' => $data[4],
+					'DATE' => $data[5],
+					'PAGE' => $data[6],
+					'COLUMN' => $data[7],
+					'MEDIUM' => $data[8],
+					'LANGUAGE' => $data[9],
+					'COUNTRY' => $data[10],
+					'PATH' => "uploaded/".$_FILES["archivo"]["name"],
+					'CONTENT' => $content
+				);
+			}
+			else
+			{
+				$arrayResponse = array(
+					'ABBREVIATION' => $abbreviation[1],
+					'TITLE' => $real_title[0],
+					'SURNAME' => $data[0],
+					'NAME' => $data[1],
+					'GEN_TITLE' => $data[2],
+					'SOURCE' => $data[3],
+					'PLACE' => $data[4],
+					'DATE' => $data[5],
+					'PAGE' => $data[6],
+					'COLUMN' => '-',
+					'MEDIUM' => $data[7],
+					'LANGUAGE' => $data[8],
+					'COUNTRY' => $data[9],
+					'PATH' => "uploaded/".$_FILES["archivo"]["name"],
+					'CONTENT' => $content
+				);
+			}
 			$type = 1;
 		}
 		else if($parserObject->type_of_doc() == 2)
@@ -85,25 +109,49 @@
 				}
 			}
 			//SOLUCIÓN MUY CUTRE PARA LOS PDF, MUCHO OJO QUE SI NO RESPETAN EL FORMATO NO FUNCIONA BIEN
-			$real_title = explode(chr(0x0a), $data[14]);
-			$abbreviation = explode(chr(0x0a), $data[12]);
-			$arrayResponse = array(
-				'ABBREVIATION' => $abbreviation[1],
-				'TITLE' => $real_title[1],
-				'SURNAME' => $data[0],
-				'NAME' => $data[1],
-				'GEN_TITLE' => $data[2],
-				'SOURCE' => $data[3],
-				'PLACE' => $data[4],
-				'DATE' => $data[5],
-				'PAGE' => $data[6],
-				'COLUMN' => $data[7],
-				'MEDIUM' => $data[8],
-				'LANGUAGE' => $data[9],
-				'COUNTRY' => $data[10],
-				'PATH' => "uploaded/".$_FILES["archivo"]["name"],
-				'CONTENT' => $content
-			);
+			$real_title = explode(chr(0x0a), $data[12]);
+			$abbreviation = explode(chr(0x0a), $data[11]);
+
+			if(sizeof($data) == 81)
+			{
+				$arrayResponse = array(
+					'ABBREVIATION' => $abbreviation[1],
+					'TITLE' => $real_title[1],
+					'SURNAME' => $data[0],
+					'NAME' => $data[1],
+					'GEN_TITLE' => $data[2],
+					'SOURCE' => $data[3],
+					'PLACE' => $data[4],
+					'DATE' => $data[5],
+					'PAGE' => $data[6],
+					'COLUMN' => $data[7],
+					'MEDIUM' => $data[8],
+					'LANGUAGE' => $data[9],
+					'COUNTRY' => $data[10],
+					'PATH' => "uploaded/".$_FILES["archivo"]["name"],
+					'CONTENT' => $content
+				);
+			}
+			else
+			{
+				$arrayResponse = array(
+					'ABBREVIATION' => $abbreviation[1],
+					'TITLE' => $real_title[1],
+					'SURNAME' => $data[0],
+					'NAME' => $data[1],
+					'GEN_TITLE' => $data[2],
+					'SOURCE' => $data[3],
+					'PLACE' => $data[4],
+					'DATE' => $data[5],
+					'PAGE' => $data[6],
+					'COLUMN' => '-',
+					'MEDIUM' => $data[7],
+					'LANGUAGE' => $data[8],
+					'COUNTRY' => $data[9],
+					'PATH' => "uploaded/".$_FILES["archivo"]["name"],
+					'CONTENT' => $content
+				);
+			}
 			$type = 1;
 		}
 		else

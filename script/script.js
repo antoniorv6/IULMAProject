@@ -26,7 +26,7 @@ function AnalyseDocument()
 {
 	let data = document.getElementById('archivo').files[0];
 
-	AjaxPOSTRequestFile('rest/postHandler/', data, output);
+	AjaxPOSTRequestFile('./rest/POST/post_handler.php', data, output);
 
 	document.querySelector('form').innerHTML += `<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`;
 	function output(response)
@@ -166,7 +166,7 @@ function AnalyseDocument()
 
 function SendDataToDB(form)
 {
-	AjaxPOSTRequest('rest/postHandler/',form, showConfirmation);
+	AjaxPOSTRequest('./rest/POST/post_handler.php',form, showConfirmation);
 
 	function showConfirmation(response)
 	{
@@ -221,20 +221,20 @@ function SearchByParameter()
 		}
 	});
 	console.log(query);
-	url = 'rest/column/?query=' + query; 
+	url = './rest/GET/get_handler.php?query=' + query; 
 	AjaxGETRequest(url, PresentResult, undefined);
 }
 
 function sendAllRequest()
 {
-	AjaxGETRequest('rest/column/', PresentResult, undefined);
+	AjaxGETRequest('./rest/GET/get_handler.php', PresentResult, undefined);
 }
 
 function SearchByWord()
 {
 	let word = document.getElementById('wordSearch').value;
 	console.log(word);
-	let url = 'rest/column/?search='+word;
+	let url = './rest/GET/get_handler.php?search='+word;
 	AjaxGETRequest(url, PresentResult, undefined);
 }
 
@@ -272,16 +272,15 @@ function checkOptions()
 
 function DemandParameters()
 {
-	AjaxGETRequest('rest/consultData/?param=Author_Name', PutParameters, 'Author_Name');
-	AjaxGETRequest('rest/consultData/?param=Author_surname', PutParameters, 'Author_surname');
-	AjaxGETRequest('rest/consultData/?param=Title', PutParameters, 'Title');
-	AjaxGETRequest('rest/consultData/?param=gen_title', PutParameters, 'gen_title');
-	AjaxGETRequest('rest/consultData/?param=Place', PutParameters, 'Place');
-	AjaxGETRequest('rest/consultData/?param=Source', PutParameters, 'Source');
-	AjaxGETRequest('rest/consultData/?param=Medium', PutParameters, 'Medium');
-	AjaxGETRequest('rest/consultData/?param=Language_written', PutParameters, 'Language_written');
-	AjaxGETRequest('rest/consultData/?param=Country', PutParameters, 'Country');
-
+	AjaxGETRequest('./rest/GET/consultparameters.php?param=Author_Name', PutParameters, 'Author_Name');
+	AjaxGETRequest('./rest/GET/consultparameters.php?param=Author_surname', PutParameters, 'Author_surname');
+	AjaxGETRequest('./rest/GET/consultparameters.php?param=Title', PutParameters, 'Title');
+	AjaxGETRequest('./rest/GET/consultparameters.php?param=gen_title', PutParameters, 'gen_title');
+	AjaxGETRequest('./rest/GET/consultparameters.php?param=Place', PutParameters, 'Place');
+	AjaxGETRequest('./rest/GET/consultparameters.php?param=Source', PutParameters, 'Source');
+	AjaxGETRequest('./rest/GET/consultparameters.php?param=Medium', PutParameters, 'Medium');
+	AjaxGETRequest('./rest/GET/consultparameters.php?param=Language_written', PutParameters, 'Language_written');
+	AjaxGETRequest('./rest/GET/consultparameters.php?param=Country', PutParameters, 'Country');
 }
 
 function PutParameters(response, theId)
