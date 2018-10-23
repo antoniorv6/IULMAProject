@@ -63,7 +63,7 @@ function AnalyseDocument()
 				<label for="gen_title">TÍTULO GENERAL DE LA CRÓNICA</label>
 				<input name= "gen_title" value="${objson.BODY.GEN_TITLE}">
 				
-				<label for="source">FUENTE</label>
+				<label for="source">NOMBRE DEL PERIÓDICO</label>
 				<input name = "source" value="${objson.BODY.SOURCE}">
 				
 				<label for="place">LUGAR</label>
@@ -78,7 +78,7 @@ function AnalyseDocument()
 				<label for="column">COLUMNA</label>
 				<input name = "column" value="${whatToPut}">
 				
-				<label for="medium">MEDIO</label>
+				<label for="medium">TIPO DE MEDIO</label>
 				<input name = "medium" value="${objson.BODY.MEDIUM}">
 				
 				<label for="language">IDIOMA</label>
