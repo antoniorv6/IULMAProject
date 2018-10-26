@@ -125,14 +125,14 @@ function AnalyseDocument()
 				</select>
 				<label>Préstamos</label>
 				<select name="loans">
-					<option>-</option>
-					<option value="Anglicismo">Fonétuca</option>
-					<option value="Germanismo">Tipografía</option>
-					<option value="Latinismo">Morfología</option>
-					<option value="Galicismo">Sintaxis</option>
-					<option value="Hispanismo">Léxico</option>
-					<option value="Italinismo">Retórica</option>
-				</select>
+                    <option>-</option>
+                    <option value="Anglicismo">Anglicismo</option>
+                    <option value="Germanismo">Germanismo</option>
+                    <option value="Latinismo">Latinismo</option>
+                    <option value="Galicismo">Galicismo</option>
+                    <option value="Hispanismo">Hispanismo</option>
+                    <option value="Italinismo">Italinismo</option>
+                </select>
 				<label>Neologismo</label>
 				<select name="neologism">
 					<option>-</option>
@@ -251,6 +251,7 @@ function PresentResult(response)
 			<p><b>Título: </b>${element.Title}</p>
 			<p><b>Fecha: </b>${element.Dateofcreation}</p>
 			<p><b>Descarga el documento: <a href = ${element.Filepath}><span class="icon-doc"></span></a></p>
+			<a class="button" href="entry.html?id=${element.ID}">Ver entrada completa</button>
 			</article>`;
 		}); 
 		
@@ -294,3 +295,309 @@ function PutParameters(response, theId)
 		place.innerHTML += `<option value="${element}">${element}</option>`;
 	});
 }
+
+function getvariablesURL(nombre)
+{
+	url = window.location.href;
+	nombre = nombre.replace(/[\[\]]/g, "\\$&");
+	var regex = new RegExp("[?&]" + nombre + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if(results == null)
+    	return undefined;
+    return results[2];
+}
+
+function getColumn()
+{
+	let id = getvariablesURL('id');
+	console.log(id);
+
+	url = './rest/GET/get_handler.php?query=' + "ID = " + "'" + id + "'";
+	url2 = './rest/GET/get_add_data.php?id='+ id
+	AjaxGETRequest(url, PresentColumn, undefined);
+	AjaxGETRequest(url2, PresentAditionalData);
+	CheckEditButton(id);
+
+}
+
+function PresentColumn(response)
+{
+	let columnJSON = JSON.parse(response);
+	console.log(columnJSON);
+
+	let articleContainer = document.getElementById('principalData');
+	articleContainer.innerHTML = `
+		<h3>${columnJSON.BODY[0].Title}</h3>
+		<ul>
+			<li>Título general: ${columnJSON.BODY[0].gen_title}</li>
+			<li>Nombre del autor: ${columnJSON.BODY[0].Author_Name}</li>
+			<li>Apellidos del autor: ${columnJSON.BODY[0].Author_surname}</li>
+			<li>País: ${columnJSON.BODY[0].Country}</li>
+			<li>Lugar: ${columnJSON.BODY[0].Place}</li>
+			<li>Fecha: ${columnJSON.BODY[0].Dateofcreation}</li>
+			<li>Idioma: ${columnJSON.BODY[0].Language_written}</li>
+			<li>Nombre del periódico: ${columnJSON.BODY[0].Source}</li>
+		<ul>
+	`
+}
+
+function PresentAditionalData(response)
+{
+	let addataJSON = JSON.parse(response);
+	console.log(addataJSON);
+
+	let secondaryContainer = document.getElementById('secondaryData');
+
+	secondaryContainer.innerHTML = `
+	<ul>
+		<li>Profesión: ${addataJSON.BODY[0].profession}</li>
+		<li>Dimensión Lingüística: ${addataJSON.BODY[0].dimention}</li>
+		<li>Etimología: ${addataJSON.BODY[0].etimology}</li>
+		<li>Préstamos: ${addataJSON.BODY[0].loans}</li>
+		<li>Política lingüística: ${addataJSON.BODY[0].lpolicy}</li>
+		<li>Neologismo: ${addataJSON.BODY[0].neologism}</li>
+		<li>Estilo: ${addataJSON.BODY[0].style}</li>
+		<li>Formación de palabras: ${addataJSON.BODY[0].wordformation}</li>
+	<ul>
+	`
+}
+
+function CheckEditButton(id)
+{
+	if(CheckSessionStatus())
+	{
+		document.getElementById('buttonEdit').innerHTML = `<a href="editColumn.html?id=${id}" class="button">Editar columna</a>`
+	}
+}
+
+function initEditForm()
+{
+	let id = getvariablesURL('id');
+	console.log(id);
+
+	url = './rest/GET/get_handler.php?query=' + "ID = " + "'" + id + "'";
+	url2 = './rest/GET/get_add_data.php?id='+ id
+	AjaxGETRequest(url, AddPrincipalParameters, undefined);
+	AjaxGETRequest(url2, AddSecondaryParameters);
+}
+
+function AddPrincipalParameters(response)
+{
+	let JSONPrincipal = JSON.parse(response);
+
+	let inputs = document.querySelectorAll('input');
+	console.log(inputs);
+
+	inputs[0].value = JSONPrincipal.BODY[0].Abbreviation
+	inputs[1].value = JSONPrincipal.BODY[0].Author_Name
+	inputs[2].value = JSONPrincipal.BODY[0].Author_surname
+	inputs[3].value = JSONPrincipal.BODY[0].Title
+	inputs[4].value = JSONPrincipal.BODY[0].gen_title
+	inputs[5].value = JSONPrincipal.BODY[0].Source
+	inputs[6].value = JSONPrincipal.BODY[0].Place
+	inputs[7].value = JSONPrincipal.BODY[0].Dateofcreation
+	inputs[8].value = JSONPrincipal.BODY[0].Col
+	inputs[9].value = JSONPrincipal.BODY[0].Medium
+	inputs[10].value = JSONPrincipal.BODY[0].Language_written
+	inputs[11].value = JSONPrincipal.BODY[0].Country
+}
+
+function AddSecondaryParameters(response)
+{
+	let JSONSecundario = JSON.parse(response);
+
+	let inputs = document.querySelectorAll('select');
+	console.log(inputs);
+
+	switch(JSONSecundario.BODY[0].profession)
+	{
+		case 'Lingüista':
+			inputs[0].selectedIndex = 1
+		break;
+		case 'Periodista':
+			inputs[0].selectedIndex = 2
+		break;
+		case 'Corrector de estilo':
+			inputs[0].selectedIndex = 3
+		break;
+		case 'Otro':
+			inputs[0].selectedIndex = 4
+		break;
+	}
+
+	switch(JSONSecundario.BODY[0].style)
+	{
+		case 'Prescriptivo':
+			inputs[1].selectedIndex = 1;
+		break;
+		case 'Descriptivo':
+			inputs[1].selectedIndex = 2;
+		break;
+		case 'Lúdico':
+			inputs[1].selectedIndex = 3;
+		break;
+	}
+	switch(JSONSecundario.BODY[0].lpolicy)
+	{
+		case 'Sí':
+			inputs[2].selectedIndex = 1;
+		break;
+		case 'No':
+			inputs[2].selectedIndex = 2;
+		break;
+	}
+	switch(JSONSecundario.BODY[0].dimention)
+	{
+		case 'Fonética':
+			inputs[2].selectedIndex = 1;
+		break;
+		case 'Tipografía':
+			inputs[2].selectedIndex = 2;
+		break;
+		case 'Morfología':
+			inputs[2].selectedIndex = 3;
+		break;
+		case 'Sintaxis':
+			inputs[2].selectedIndex = 4;
+		break;
+		case 'Léxico':
+			inputs[2].selectedIndex = 5;
+		break;
+		case 'Retórica':
+			inputs[2].selectedIndex = 6;
+		break;
+		case 'Pragmática y textualidad':
+			inputs[2].selectedIndex = 1;
+		break;
+	}
+	switch(JSONSecundario.BODY[0].loans)
+	{
+		case 'Anglicismo':
+			inputs[3].selectedIndex = 1;
+		break;
+		case 'Germanismo':
+			inputs[3].selectedIndex = 2;
+		break;
+		case 'Latinismo':
+			inputs[3].selectedIndex = 3;
+		break;
+		case 'Galicismo':
+			inputs[3].selectedIndex = 4;
+		break;
+		case 'Hispanismo':
+			inputs[3].selectedIndex = 5;
+		break;
+		case 'Italinismo':
+			inputs[3].selectedIndex = 6;
+		break;
+	}
+	switch(JSONSecundario.BODY[0].neologism)
+	{
+		case 'Sí':
+			inputs[4].selectedIndex = 1;
+		break;
+		case 'No':
+			inputs[4].selectedIndex = 2;
+		break;
+	}
+	switch(JSONSecundario.BODY[0].wordformation)
+	{
+		case 'Abreviación':
+			inputs[5].selectedIndex = 1
+		break;
+		case 'Tipografía':
+			inputs[5].selectedIndex = 2
+		break;
+		case 'Prefijación':
+			inputs[5].selectedIndex = 3
+		break;
+		case 'Sufijación':
+			inputs[5].selectedIndex = 4
+		break;
+	}
+
+	switch(JSONSecundario.BODY[0].neologism)
+	{
+		case 'Sí':
+			inputs[6].selectedIndex = 1;
+		break;
+		case 'No':
+			inputs[6].selectedIndex = 2;
+		break;
+	}
+}
+
+function EditColumn()
+{
+	let id = getvariablesURL('id');
+	console.log(id);
+	
+	EditMainParameters(id);
+	EditSecondaryParameters(id);
+
+	return false;
+}
+
+function EditMainParameters(id)
+{
+	let queryString = 'UPDATE `column` SET ';
+	let inputs = document.querySelectorAll('input');
+	queryString += "Author_surname =" + "'" + inputs[1].value +"',"
+	queryString += "Author_Name =" + "'" + inputs[2].value +"',"
+	queryString += "Title =" + "\"" + inputs[3].value +"\","
+	queryString += "gen_title =" + "'" + inputs[4].value +"',"
+	queryString += "Source =" + "'" + inputs[5].value +"',"
+	queryString += "Place =" + "'" + inputs[6].value +"',"
+	queryString += "Dateofcreation =" + "'" + inputs[7].value +"',"
+	queryString += "Col =" + "'" + inputs[8].value +"',"
+	queryString += "Medium =" + "'" + inputs[9].value +"',"
+	queryString += "Language_written =" + "'" + inputs[10].value +"',"
+	queryString += "Country =" + "'" + inputs[11].value + "' "
+	queryString += "WHERE ID = " + "'" + id + "'"
+	
+
+	console.log(queryString);
+
+	let url = './rest/GET/editColumn.php?query=' + queryString;
+
+	AjaxGETRequest(url, UpdateResponse);
+}
+
+function UpdateResponse(response)
+{
+	objJSON = JSON.parse(response);
+		section = document.querySelector('section');
+		if(objJSON.BODY.RESULT == "OK")
+		{
+			console.log(objJSON);
+			section.innerHTML = `
+				<article class = "instructions">
+					<h2 class = "success"> ENHORABUENA </h2>
+					<h3>${objJSON.BODY.MESSAGE}</h3>
+				</article>
+			`;
+		}
+}
+
+function EditSecondaryParameters(id)
+{
+	let queryString = 'UPDATE additionaldata SET ';
+	let inputs = document.querySelectorAll('select');
+	queryString += "profession =" + "'" + inputs[0].value +"',"
+	queryString += "style =" + "'" + inputs[1].value +"',"
+	queryString += "lpolicy =" + "'" + inputs[2].value +"',"
+	queryString += "dimention =" + "'" + inputs[3].value +"',"
+	queryString += "loans =" + "'" + inputs[4].value +"',"
+	queryString += "neologism =" + "'" + inputs[5].value +"',"
+	queryString += "wordformation =" + "'" + inputs[6].value +"',"
+	queryString += "etimology =" + "'" + inputs[7].value +"'"
+	queryString += "WHERE article = " + "'" + id + "'"
+
+
+	console.log(queryString);
+
+	let url = './rest/GET/editColumn.php?query=' + queryString;
+
+	AjaxGETRequest(url, UpdateResponse);
+
+}	

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Base de datos Metapress</title>
+		<script src="script/requests.js"></script>
+		<script src="script/script.js"></script>
+		<script src="script/userControl.js"></script>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/folder.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+            <div id='cssmenu'>
+                    <ul>
+                        <li><a href='index.html'><span>Inicio</span></a></li>
+                        <li><a href='search.html'><span>Consultas</span></a></li>
+                        <li class="rightside" id="loginform">
+                        </li>
+                    </ul>
+            </div>
+            <section>
+            <article class="instructions">
+                <h2> EDITAR CORPUS </h2>
+                <h3> Edite los datos que desee</h3>
+             </article>
+            <article id="formupload">
+
+                    <form onsubmit="return EditColumn()" class="uploadform">
+                        <p><b>Datos obligatorios</b></p>
+                        <label for="abbreviation">ABREVIACIÓN</label>
+                        <input name="abbreviation">
+        
+                        <label for="surname">APELLIDOS</label>
+                        <input name = "surname">
+                        
+                        <label for="name">NOMBRE</label>
+                        <input name = "name">                      
+                        <label for="title">TÍTULO DE LA CRÓNICA</label>
+                        <input name = "title">
+        
+                        <label for="gen_title">TÍTULO GENERAL DE LA CRÓNICA</label>
+                        <input name= "gen_title">
+                        
+                        <label for="source">NOMBRE DEL PERIÓDICO</label>
+                        <input name = "source">
+                        
+                        <label for="place">LUGAR</label>
+                        <input name = "place"> 
+                        
+                        <label for="date">FECHA</label>
+                        <input name = "date">                                            
+                        <label for="column">COLUMNA</label>
+                        <input name = "column">                 
+                        <label for="medium">TIPO DE MEDIO</label>
+                        <input name = "medium">
+                        
+                        <label for="language">IDIOMA</label>
+                        <input name = "language">
+                        
+                        <label for="country">PAÍS</label>
+                        <input name = "country">
+        
+                        <input name = "user" value="${sessionStorage.getItem('user')}" hidden>
+                        <input name = "filepath" value="${objson.BODY.PATH}" hidden>
+                        <textarea name = "content" hidden>${objson.BODY.CONTENT}</textarea>
+        
+                        <label>Profesión</label>
+                        <select name="profession">
+                            <option>-</option>
+                            <option value="Lingüista">Lingüista</option>
+                            <option value="Periodista">Periodista</option>
+                            <option value="Corrector de estilo">Corrector de estilo</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                        <label>Estilo</label>
+                        <select name="style">
+                            <option>-</option>
+                            <option value="Prescriptivo">Prescriptivo</option>
+                            <option value="Descriptivo">Descriptivo</option>
+                            <option value="Lúdico">Lúdico</option>
+                        </select>
+                        <label>Política lingüística</label>
+                        <select name="policy">
+                            <option>-</option>
+                            <option value="Si">Sí</option>
+                            <option value="No">No</option>
+                        </select>
+                        <label>Dimensión lingüística</label>
+                        <select name="dimention">
+                            <option>-</option>
+                            <option value="Fonética">Fonética</option>
+                            <option value="Tipografía">Tipografía</option>
+                            <option value="Morfología">Morfología</option>
+                            <option value="Sintaxis">Sintaxis</option>
+                            <option value="Léxico">Léxico</option>
+                            <option value="Retórica">Retórica</option>
+                            <option value="Pragmática y textualidad">Pragmática y textualidad</option>
+                        </select>
+                        <label>Préstamos</label>
+                        <select name="loans">
+                            <option>-</option>
+                            <option value="Anglicismo">Anglicismo</option>
+                            <option value="Germanismo">Germanismo</option>
+                            <option value="Latinismo">Latinismo</option>
+                            <option value="Galicismo">Galicismo</option>
+                            <option value="Hispanismo">Hispanismo</option>
+                            <option value="Italinismo">Italinismo</option>
+                        </select>
+                        <label>Neologismo</label>
+                        <select name="neologism">
+                            <option>-</option>
+                            <option value="Si">Sí</option>
+                            <option value="No">No</option>
+                        </select>
+                        <label>Formación de palabras</label>
+                        <select name="wordformation">
+                            <option>-</option>
+                            <option value="Abreviación">Abreviación</option>
+                            <option value="Composición">Tipografía</option>
+                            <option value="Prefijación">Prefijación</option>
+                            <option value="Sufijación">Sufijación</option>
+                        </select>
+                        <label>Etimología</label>
+                        <select name="etimology">
+                            <option>-</option>
+                            <option value="Si">Sí</option>
+                            <option value="No">No</option>
+                        </select>
+                        <input type="submit" class="button addParameters" value = "Editar">
+        
+                    </form>
+        
+                    </article>
+                </section>
+                    <script>
+                        initMenu();
+                        initEditForm();
+                    </script>
+    </body>
+    </html>
