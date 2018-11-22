@@ -31,11 +31,8 @@
         
         if($userExists['userExists'] == 1)
         {
-            //TODO -> Crear token de sesión y automatizar el proceso de eliminación de tokens cada X horas.
-            $token = GenerateSessionToken($dbConnection, $mail, $pass);
             $sessioninfo = array(
                 'USER' => $depuredMail,
-                'SESSION_TOKEN' =>  $token,
                 'DISPOSITIVE' => $_SERVER['REMOTE_ADDR']
             );
             SendResponse(1, $sessioninfo);
@@ -46,42 +43,4 @@
         }
     }
 
-    function GenerateSessionToken($dbConnection, $user, $pass)
-    {   
-        $today = time();
-        $date = "'".date('Y-m-d H:i:s', $today)."'";
-        $token = "'".md5( $pass . date('YmdHis', $today))."'";
-        $dispositive = "'".$_SERVER['REMOTE_ADDR']."'";
-        $token_insertion = "INSERT INTO session (email,dispositive,timeoflogin,token) VALUES ($user, $dispositive, $date, $token)";
-
-        if(!($result = @mysqli_query($dbConnection, $token_insertion))) 
-        { 
-           $secondQuery = 'SELECT * FROM session WHERE email = ' . $user;
-           if(!($secondresult = @mysqli_query($dbConnection, $secondQuery)))
-           {
-                print json_encode("<p>Error al ejecutar la sentencia <b>$secondQuery</b>: " . mysqli_error($dbConnection));
-                exit; 
-           }
-
-           $data=mysqli_fetch_assoc($secondresult);
-
-           if($data['dispositive'] == $_SERVER['REMOTE_ADDR'])
-           {
-               //Mismo dispositivo, renovamos token de sesion
-               $updateQuery = 'UPDATE session SET token = '.$token.',timeoflogin='.$date.'WHERE email ='.$user;
-
-               if(!($updateresult = @mysqli_query($dbConnection, $updateQuery)))
-               {
-                    print json_encode("<p>Error al ejecutar la sentencia <b>$updateQuery</b>: " . mysqli_error($dbConnection));
-                    exit;
-               }
-           }
-           else
-           {
-                SendResponse(0, 'Error, otro dispositivo tiene la sesión iniciada');
-           }
-        }
-        closeDBcon($dbConnection);
-        return $token;
-    }
 ?>

@@ -17,14 +17,7 @@
 
     $mail = '"'.$depuredMail.'"';
     $query = 'DELETE FROM session WHERE email = '.$mail;
-
-    if(!($resultado = @mysqli_query($dbConnection, $query))) 
-    { 
-        print json_encode("<p>Error al ejecutar la sentencia <b>$query</b>: " . mysqli_error($dbConnection));
-        exit; 
-    }
-    else
-    {
-        SendResponse(1, 'logout ok');
-    }
+    
+    SendResponse(1, 'logout ok');
+    
 ?>
