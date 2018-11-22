@@ -10,8 +10,10 @@
 	if(isset($_GET['search']))
 	{
 		$searchWord = mysqli_real_escape_string($dbConnection, $_GET['search']);
-		$searchWord = "'".'%'.$searchWord.'%'."'";
-		$firstquery = "SELECT article FROM content WHERE textcontent LIKE $searchWord";
+		$searchWordMiddle = "'".'% '.$searchWord.' %'."'";
+		$searchWordLast = "'".'% '.$searchWord."'";
+		$searchWordFirst = "'".$searchWord.' %'."'";
+		$firstquery = "SELECT article FROM content WHERE textcontent LIKE $searchWordMiddle OR textcontent LIKE $searchWordFirst OR textcontent LIKE $searchWordLast";
 		if(!($articles = @mysqli_query($dbConnection, $firstquery))) 
     	{
 			$response = array(

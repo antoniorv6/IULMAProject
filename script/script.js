@@ -257,20 +257,6 @@ function PresentResult(response)
 		
 }
 
-function checkOptions()
-{
-	//TODO, set all columns in admin view
-	let selects = document.querySelectorAll('select');
-
-	selects.forEach(function(child)
-		{
-			if(child.childElementCount < 7)
-			{
-				child.style.overflow = 'hidden';
-			}
-		});
-}
-
 function DemandParameters()
 {
 	AjaxGETRequest('./rest/GET/consultparameters.php?param=Author_Name', PutParameters, 'Author_Name');
@@ -280,6 +266,7 @@ function DemandParameters()
 	AjaxGETRequest('./rest/GET/consultparameters.php?param=Place', PutParameters, 'Place');
 	AjaxGETRequest('./rest/GET/consultparameters.php?param=Source', PutParameters, 'Source');
 	AjaxGETRequest('./rest/GET/consultparameters.php?param=Medium', PutParameters, 'Medium');
+	AjaxGETRequest('./rest/GET/consultparameters.php?param=Dateofcreation', PutParameters, 'Dateofcreation');
 	AjaxGETRequest('./rest/GET/consultparameters.php?param=Language_written', PutParameters, 'Language_written');
 	AjaxGETRequest('./rest/GET/consultparameters.php?param=Country', PutParameters, 'Country');
 }
@@ -389,8 +376,8 @@ function AddPrincipalParameters(response)
 	console.log(inputs);
 
 	inputs[0].value = JSONPrincipal.BODY[0].Abbreviation
-	inputs[1].value = JSONPrincipal.BODY[0].Author_Name
-	inputs[2].value = JSONPrincipal.BODY[0].Author_surname
+	inputs[2].value = JSONPrincipal.BODY[0].Author_Name
+	inputs[1].value = JSONPrincipal.BODY[0].Author_surname
 	inputs[3].value = JSONPrincipal.BODY[0].Title
 	inputs[4].value = JSONPrincipal.BODY[0].gen_title
 	inputs[5].value = JSONPrincipal.BODY[0].Source

@@ -12,6 +12,15 @@
 	box-sizing: border-box;
 	font-family: sans-serif;
 }
+#intro
+{
+	padding: 3em;
+}
+#intro>article
+{
+	align-content: center;
+}
+
 .results>.data
 {
 	display: flex;
