@@ -13,7 +13,20 @@
 		$searchWordMiddle = "'".'% '.$searchWord.' %'."'";
 		$searchWordLast = "'".'% '.$searchWord."'";
 		$searchWordFirst = "'".$searchWord.' %'."'";
-		$firstquery = "SELECT article FROM content WHERE textcontent LIKE $searchWordMiddle OR textcontent LIKE $searchWordFirst OR textcontent LIKE $searchWordLast";
+		
+		$searchWordComma = "'".'% '.$searchWord.','.' %'."'";
+		$searchWordPoint = "'".'% '.$searchWord.'.'.' %'."'";
+		$searchWordDotComma = "'".'% '.$searchWord.';'.' %'."'";
+		$searchWordTwoPoints = "'".'% '.$searchWord.':'.' %'."'";
+
+		$searchWordComillas = "'".'% '.'"'.$searchWord.'"'.' %'."'";
+		$searchWordSimples = "\"".'% '.'\''.$searchWord.'\''.' %'."\"";
+
+
+
+
+		$firstquery = "SELECT article FROM content WHERE textcontent LIKE $searchWordMiddle OR textcontent LIKE $searchWordFirst OR textcontent LIKE $searchWordLast OR textcontent LIKE $searchWordComma OR textcontent LIKE $searchWordPoint OR textcontent LIKE $searchWordDotComma OR textcontent LIKE $searchWordTwoPoints OR textcontent LIKE $searchWordComillas OR textcontent LIKE $searchWordSimples";
+
 		if(!($articles = @mysqli_query($dbConnection, $firstquery))) 
     	{
 			$response = array(
@@ -54,7 +67,7 @@
 				$response = array(
 					'RESULT' => 'ERROR',
 					'MESSAGE' => 'Ha habido un error extrayendo artículos',
-					'QUERY' => $query,
+					'QUERY' => $firstquery,
 					'DEBUGMESSAGE' => mysqli_error($dbConnection)
 				);
 				SendResponse(0, $response);
@@ -71,7 +84,7 @@
 			$response = array(
 				'RESULT' => 'ERROR',
 				'MESSAGE' => 'Ha habido un error realizando su petición',
-				'QUERY' => $query,
+				'QUERY' => $firstquery,
 				'DEBUGMESSAGE' => mysqli_error($dbConnection)
 			);
 				
