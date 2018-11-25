@@ -219,7 +219,8 @@
 			$insert = false;
 			$idtoinsert = $data['ID'];
 			$finalquery = "INSERT INTO additionaldata (article, profession, style, lpolicy, dimention, loans, neologism, wordformation, etimology) VALUES ($idtoinsert, ";
-			$finalquery = $finalquery . '"'. $_POST['profession'] . '"' . "," . '"' . $_POST['style'] . '"' . "," . '"' . $_POST['policy'] .'"' . "," . '"'. $_POST['dimention'] . '"' . "," . '"' . $_POST['loans'] .'"' . "," . '"'. $_POST['neologism'] . '"' . "," . '"' . $_POST['wordformation'] . '"' . "," . '"' . $_POST['etimology'] . '"' . ")";
+			$finalquery = $finalquery . getAditionalContent();
+			
 			
 			if(!($result = @mysqli_query($dbConnection, $finalquery))) 
         	{
@@ -229,15 +230,107 @@
 					'DEBUGMESSAGE' => mysqli_error($dbConnection));
 				
 				SendResponse(0, $response);	
-		}
+			}
 
 		$response = array(
 				'RESULT' => 'OK',
-				'MESSAGE' => 'Datos insertados correctamente'
+				'MESSAGE' => $finalquery
 			);
 			
 			SendResponse(1, $response);
 		}
+	}
+
+	function getAditionalContent()
+	{
+		$finalquery = "";
+		if(!isset($_POST['profession']))
+		{
+			$finalquery = $finalquery. "-,";
+		}
+		else
+		{
+			$finalquery = $finalquery . extractCheckedData($_POST['profession']). ",";
+		}
+		
+		if(!isset($_POST['style']))
+		{
+			$finalquery = $finalquery. "'-',";
+		}
+		else
+		{
+			$finalquery = $finalquery . extractCheckedData($_POST['style']). ",";
+		}
+
+		$finalquery = $finalquery."'".$_POST['policy']."'".",";
+
+		if(!isset($_POST['dimention']))
+		{
+			$finalquery = $finalquery. "'-',";
+		}
+		else
+		{
+			$finalquery = $finalquery . extractCheckedData($_POST['dimention']). ",";
+		}
+
+		if(!isset($_POST['loans']))
+		{
+			$finalquery = $finalquery. "'-',";
+		}
+		else
+		{
+			$finalquery = $finalquery . extractCheckedData($_POST['loans']). ",";
+		}
+
+		$finalquery = $finalquery."'".$_POST['neologism']."'".",";
+
+		if(!isset($_POST['wordformation']))
+		{
+			$finalquery = $finalquery. "'-',";
+		}
+		else
+		{
+			$finalquery = $finalquery . extractCheckedData($_POST['wordformation']). ",";
+		}
+
+		$finalquery = $finalquery."'".$_POST['etimology']."'";
+
+		$finalquery = $finalquery.")";
+
+		return $finalquery;
+	}
+
+	function extractCheckedData($array)
+	{
+		$dataextracted = '"';
+		$size = count($array);
+		$firstone = true;
+
+			for($i = 0 ; $i < $size; $i++)
+			{
+				if(isset($array[$i]))
+				{
+					if($firstone)
+					{
+						if($i == $size-1)
+							$dataextracted = $dataextracted.$array[$i];
+						else
+							$dataextracted = $dataextracted.$array[$i].",";
+						
+						$firstone = false;
+					}
+					else
+					{
+						if($i == $size-1)
+							$dataextracted = $dataextracted.$array[$i];
+						else
+							$dataextracted = $dataextracted.$array[$i].",";
+					}
+				}
+			}
+			
+			$dataextracted = $dataextracted. '"';
+			return $dataextracted;
 	}
 
 	function SendContent($dbConnection, $id, $content)
