@@ -66,67 +66,62 @@
                         <textarea name = "content" hidden>${objson.BODY.CONTENT}</textarea>
         
                         <label>Profesión</label>
-                        <select name="profession">
-                            <option>-</option>
-                            <option value="Lingüista">Lingüista</option>
-                            <option value="Periodista">Periodista</option>
-                            <option value="Corrector de estilo">Corrector de estilo</option>
-                            <option value="Otro">Otro</option>
-                        </select>
+                            <div id="profession">
+                                <label><input type="checkbox" name="profession[]" value="Lingüista">Lingüista</label>
+                                <label><input type="checkbox" name="profession[]" value="Periodista">Periodista</label>
+                                <label><input type="checkbox" name="profession[]" value="Corrector de estilo">Corrector de estilo</label>
+                                <label><input type="checkbox" name="profession[]" value="Otro">Otro</label>
+                            </div>
                         <label>Estilo</label>
-                        <select name="style">
-                            <option>-</option>
-                            <option value="Prescriptivo">Prescriptivo</option>
-                            <option value="Descriptivo">Descriptivo</option>
-                            <option value="Lúdico">Lúdico</option>
-                        </select>
+                            <div id="style">
+                                <label><input type="checkbox" name="style[]" value="Prescriptivo">Prescriptivo</label>
+                                <label><input type="checkbox" name="style[]" value="Descriptivo">Descriptivo</label>
+                                <label><input type="checkbox" name="style[]" value="Lúdico">Lúdico</label>
+                            </div>
                         <label>Política lingüística</label>
-                        <select name="policy">
-                            <option>-</option>
-                            <option value="Si">Sí</option>
-                            <option value="No">No</option>
-                        </select>
+                            <select name="policy" id="policy">
+                                <option>-</option>
+                                <option value="Si">Sí</option>
+                                <option value="No">No</option>
+                            </select>
                         <label>Dimensión lingüística</label>
-                        <select name="dimention">
-                            <option>-</option>
-                            <option value="Fonética">Fonética</option>
-                            <option value="Tipografía">Tipografía</option>
-                            <option value="Morfología">Morfología</option>
-                            <option value="Sintaxis">Sintaxis</option>
-                            <option value="Léxico">Léxico</option>
-                            <option value="Retórica">Retórica</option>
-                            <option value="Pragmática y textualidad">Pragmática y textualidad</option>
-                        </select>
+                            <div id="dimention">
+                                <label><input type="checkbox" name="dimention[]" value="Fonética">Fonética</label>
+                                <label><input type="checkbox" name="dimention[]" value="Tipografía">Tipografía</label>
+                                <label><input type="checkbox" name="dimention[]" value="Morfología">Morfología</label>
+                                <label><input type="checkbox" name="dimention[]" value="Sintaxis">Sintaxis</label>
+                                <label><input type="checkbox" name="dimention[]" value="Léxico">Léxico</label>
+                                <label><input type="checkbox" name="dimention[]" value="Léxico">Retórica</label>
+                                <label><input type="checkbox" name="dimention[]" value="Léxico">Pragmática y textualidad</label>
+                            </div>
                         <label>Préstamos</label>
-                        <select name="loans">
-                            <option>-</option>
-                            <option value="Anglicismo">Anglicismo</option>
-                            <option value="Germanismo">Germanismo</option>
-                            <option value="Latinismo">Latinismo</option>
-                            <option value="Galicismo">Galicismo</option>
-                            <option value="Hispanismo">Hispanismo</option>
-                            <option value="Italinismo">Italinismo</option>
-                        </select>
+                            <div id="loans">
+                                <label><input type="checkbox" name="loans[]" value="Anglicismo">Anglicismo</label>
+                                <label><input type="checkbox" name="loans[]" value="Germanismo">Germanismo</label>
+                                <label><input type="checkbox" name="loans[]" value="Latinismo">Latinismo</label>
+                                <label><input type="checkbox" name="loans[]" value="Galicismo">Galicismo</label>
+                                <label><input type="checkbox" name="loans[]" value="Hispanismo">Hispanismo</label>
+                                <label><input type="checkbox" name="loans[]" value="Italicismo">Italicismo</label>
+                            </div>
                         <label>Neologismo</label>
-                        <select name="neologism">
-                            <option>-</option>
-                            <option value="Si">Sí</option>
-                            <option value="No">No</option>
-                        </select>
+                            <select name="neologism" id ="neologism">
+                                <option>-</option>
+                                <option value="Si">Sí</option>
+                                <option value="No">No</option>
+                            </select>
                         <label>Formación de palabras</label>
-                        <select name="wordformation">
-                            <option>-</option>
-                            <option value="Abreviación">Abreviación</option>
-                            <option value="Composición">Tipografía</option>
-                            <option value="Prefijación">Prefijación</option>
-                            <option value="Sufijación">Sufijación</option>
-                        </select>
+                        <div id="wordformation">
+                            <label><input type="checkbox" name="wordformation[]" value="Abreviación">Abreviación</label>
+                            <label><input type="checkbox" name="wordformation[]" value="Tipografía">Tipografía</label>
+                            <label><input type="checkbox" name="wordformation[]" value="Prefijación">Prefijación</label>
+                            <label><input type="checkbox" name="wordformation[]" value="Sufijación">Sufijación</label>
+                        </div>
                         <label>Etimología</label>
-                        <select name="etimology">
-                            <option>-</option>
-                            <option value="Si">Sí</option>
-                            <option value="No">No</option>
-                        </select>
+                            <select name="etimology" id="etimology">
+                                <option>-</option>
+                                <option value="Si">Sí</option>
+                                <option value="No">No</option>
+                            </select>
                         <input type="submit" class="button addParameters" value = "Editar">
         
                     </form>

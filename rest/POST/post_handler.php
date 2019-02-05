@@ -246,7 +246,7 @@
 		$finalquery = "";
 		if(!isset($_POST['profession']))
 		{
-			$finalquery = $finalquery. "-,";
+			$finalquery = $finalquery. "'-',";
 		}
 		else
 		{
@@ -335,7 +335,7 @@
 
 	function SendContent($dbConnection, $id, $content)
 	{
-		$contenttoDB = '"'.$content.'"';
+		$contenttoDB = '"'.mysqli_real_escape_string($dbConnection,$content).'"';
 		$query = "INSERT INTO content (article, textcontent) VALUES ($id, $contenttoDB)";
 
 		if(!($result = @mysqli_query($dbConnection, $query))) 
@@ -345,6 +345,8 @@
 				'MESSAGE' => 'Ha habido un problema metiendo el contenido',
 				'DEBUGMESSAGE' => mysqli_error($dbConnection)
 			);
+
+			echo mysqli_error($dbConnection);
 			
 			SendResponse(0, $response);
 			return false;

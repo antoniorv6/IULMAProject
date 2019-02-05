@@ -165,6 +165,7 @@ function SendDataToDB(form)
 
 	function showConfirmation(response)
 	{
+		console.log(response);
 		objJSON = JSON.parse(response);
 		section = document.querySelector('section');
 		if(objJSON.BODY.RESULT == "OK")
@@ -388,124 +389,53 @@ function AddSecondaryParameters(response)
 {
 	let JSONSecundario = JSON.parse(response);
 
-	let inputs = document.querySelectorAll('select');
-	console.log(inputs);
+	console.log("JSONSec: ");
+	console.log(JSONSecundario);
 
-	switch(JSONSecundario.BODY[0].profession)
-	{
-		case 'Lingüista':
-			inputs[0].selectedIndex = 1
-		break;
-		case 'Periodista':
-			inputs[0].selectedIndex = 2
-		break;
-		case 'Corrector de estilo':
-			inputs[0].selectedIndex = 3
-		break;
-		case 'Otro':
-			inputs[0].selectedIndex = 4
-		break;
-	}
+	JSONSecundario.BODY.forEach(function(element){
+		for(var key in element)
+		{
+			console.log(key);
+			checkSecondaryParams(key, element[key]);
+		}
+	});
+	
+	checkSecondarySelects('policy',JSONSecundario.BODY[0].lpolicy);
+	checkSecondarySelects('neologism',JSONSecundario.BODY[0].neologism);
+	checkSecondarySelects('etimology',JSONSecundario.BODY[0].etimology);
+}
 
-	switch(JSONSecundario.BODY[0].style)
+function checkSecondarySelects(formID, result)
+{
+	let input = document.getElementById(formID);
+	switch(result)
 	{
-		case 'Prescriptivo':
-			inputs[1].selectedIndex = 1;
-		break;
-		case 'Descriptivo':
-			inputs[1].selectedIndex = 2;
-		break;
-		case 'Lúdico':
-			inputs[1].selectedIndex = 3;
-		break;
-	}
-	switch(JSONSecundario.BODY[0].lpolicy)
-	{
-		case 'Sí':
-			inputs[2].selectedIndex = 1;
+		case 'Si':
+			input.selectedIndex = 1;
 		break;
 		case 'No':
-			inputs[2].selectedIndex = 2;
-		break;
+			inputs.selectedIndex = 2;
+		break;	
 	}
-	switch(JSONSecundario.BODY[0].dimention)
-	{
-		case 'Fonética':
-			inputs[2].selectedIndex = 1;
-		break;
-		case 'Tipografía':
-			inputs[2].selectedIndex = 2;
-		break;
-		case 'Morfología':
-			inputs[2].selectedIndex = 3;
-		break;
-		case 'Sintaxis':
-			inputs[2].selectedIndex = 4;
-		break;
-		case 'Léxico':
-			inputs[2].selectedIndex = 5;
-		break;
-		case 'Retórica':
-			inputs[2].selectedIndex = 6;
-		break;
-		case 'Pragmática y textualidad':
-			inputs[2].selectedIndex = 1;
-		break;
-	}
-	switch(JSONSecundario.BODY[0].loans)
-	{
-		case 'Anglicismo':
-			inputs[3].selectedIndex = 1;
-		break;
-		case 'Germanismo':
-			inputs[3].selectedIndex = 2;
-		break;
-		case 'Latinismo':
-			inputs[3].selectedIndex = 3;
-		break;
-		case 'Galicismo':
-			inputs[3].selectedIndex = 4;
-		break;
-		case 'Hispanismo':
-			inputs[3].selectedIndex = 5;
-		break;
-		case 'Italinismo':
-			inputs[3].selectedIndex = 6;
-		break;
-	}
-	switch(JSONSecundario.BODY[0].neologism)
-	{
-		case 'Sí':
-			inputs[4].selectedIndex = 1;
-		break;
-		case 'No':
-			inputs[4].selectedIndex = 2;
-		break;
-	}
-	switch(JSONSecundario.BODY[0].wordformation)
-	{
-		case 'Abreviación':
-			inputs[5].selectedIndex = 1
-		break;
-		case 'Tipografía':
-			inputs[5].selectedIndex = 2
-		break;
-		case 'Prefijación':
-			inputs[5].selectedIndex = 3
-		break;
-		case 'Sufijación':
-			inputs[5].selectedIndex = 4
-		break;
-	}
+}
 
-	switch(JSONSecundario.BODY[0].neologism)
+function checkSecondaryParams(formID, queryString)
+{
+	let allocator = document.getElementById(formID);
+	let stringSearch = queryString.split(",");
+
+	if(allocator != null)
 	{
-		case 'Sí':
-			inputs[6].selectedIndex = 1;
-		break;
-		case 'No':
-			inputs[6].selectedIndex = 2;
-		break;
+		for(var i = 0; i<allocator.childElementCount; i++)
+		{
+			for(var j = 0; j<stringSearch.length; j++)
+			{
+				if(allocator.children[i].children[0] != undefined && allocator.children[i].children[0].value == stringSearch[j])
+				{
+					allocator.children[i].children[0].checked = true;
+				}
+			}
+		}
 	}
 }
 
@@ -565,21 +495,57 @@ function EditSecondaryParameters(id)
 {
 	let queryString = 'UPDATE additionaldata SET ';
 	let inputs = document.querySelectorAll('select');
-	queryString += "profession =" + "'" + inputs[0].value +"',"
-	queryString += "style =" + "'" + inputs[1].value +"',"
-	queryString += "lpolicy =" + "'" + inputs[2].value +"',"
-	queryString += "dimention =" + "'" + inputs[3].value +"',"
-	queryString += "loans =" + "'" + inputs[4].value +"',"
-	queryString += "neologism =" + "'" + inputs[5].value +"',"
-	queryString += "wordformation =" + "'" + inputs[6].value +"',"
-	queryString += "etimology =" + "'" + inputs[7].value +"'"
+	
+	queryString += "lpolicy =" + "'" + inputs[0].value +"',"
+	queryString += "neologism =" + "'" + inputs[1].value +"',"
+	queryString += "etimology =" + "'" + inputs[2].value +"',"
+	
+	queryString += appendCheckBoxValuesToQuery('profession', false);
+	queryString += appendCheckBoxValuesToQuery('style', false);
+	queryString += appendCheckBoxValuesToQuery('dimention', false);
+	queryString += appendCheckBoxValuesToQuery('loans', false);
+	queryString += appendCheckBoxValuesToQuery('wordformation', true);
+	
 	queryString += "WHERE article = " + "'" + id + "'"
-
 
 	console.log(queryString);
 
 	let url = './rest/GET/editColumn.php?query=' + queryString;
 
 	AjaxGETRequest(url, UpdateResponse);
+}
 
-}	
+function appendCheckBoxValuesToQuery(identificator, last)
+{
+	var array = document.getElementsByName(identificator + '[]');
+	var result = identificator + "=" + '"';
+	var firstone = true;
+	var inserted = false;
+
+	for(var i = 0; i<array.length; i++)
+	{
+		if(array[i].checked == true)
+		{
+			if(firstone)
+			{
+				result += array[i].value
+				firstone = false;
+				inserted = true;
+			}
+			else
+				result += ',' + array[i].value
+		}
+	}
+
+	if(!inserted)
+		result += "-"
+	
+	result += '"';
+
+	if(last)
+		return result;
+
+	result += ','
+
+	return result;
+}
